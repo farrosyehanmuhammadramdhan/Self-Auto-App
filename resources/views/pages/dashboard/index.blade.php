@@ -48,9 +48,9 @@
                             <h4>Total Pelanggan</h4>
                         </div>
                         <div class="card-body">
-                            12
+                            43
                             <br>
-                            <button class="btn btn-primary btn-sm mt-2">Lihat Data</button>
+                            <a href="{{ route('costumers.index') }}"><button class="btn btn-primary btn-sm mt-2">Lihat Data</button></a>
                         </div>
                     </div>
                 </div>

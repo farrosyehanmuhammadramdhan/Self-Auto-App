@@ -9,7 +9,8 @@ class CostumersController extends Controller
 {
     public function index()
     {
-        return view('pages.costumers.index');
+        $costumers = Costumers::all();
+        return view('pages.costumers.index', compact('costumers'));
     }
 
     public function create()

@@ -37,7 +37,7 @@
                             <div class="clearfix mb-3"></div>
 
                             <div class="table-responsive">
-                                <table class="table-striped table" id="costumers-table">
+                                <table class="table-striped table" id="vehicles-table">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -101,7 +101,7 @@
 
 <script>
     $(document).ready(function() {
-        $('#costumers-table').DataTable({
+        $('#vehicles-table').DataTable({
             "lengthMenu": [
                 [5, 10, 25, 50]
             ],

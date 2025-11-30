@@ -17,7 +17,7 @@
         <section class="section">
             <div class="section-header">
                 <div class="section-header-back">
-                    <a href="features-posts.html"
+                    <a href="{{ route('costumers.index') }}"
                         class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
                 <h1>Create New Post</h1>
@@ -40,11 +40,13 @@
                             <div class="card-header">
                                 <h4>Write Your Post</h4>
                             </div>
-                            <div class="card-body">
+                            <form action="{{ route('costumers.store') }}" method="POST">
+                                @csrf
+                                <div class="card-body">
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Name</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="text"
+                                        <input type="text" name="name"
                                             class="form-control">
                                     </div>
                                 </div>
@@ -52,7 +54,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Email</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="text"
+                                        <input type="text" name="email"
                                             class="form-control">
                                     </div>
                                 </div>
@@ -60,7 +62,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Phone</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="text"
+                                        <input type="text" name="phone"
                                             class="form-control">
                                     </div>
                                 </div>
@@ -68,7 +70,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Address</label>
                                     <div class="col-sm-12 col-md-7">
-                                        <input type="textarea"
+                                        <input type="textarea" name="address"
                                             class="form-control">
                                     </div>
                                 </div>
@@ -80,6 +82,7 @@
                                     </div>
                                 </div>
                             </div>
+                            </form>
                         </div>
                     </div>
                 </div>
