@@ -3,11 +3,8 @@
 @section('title', 'Pelanggan')
 
 @push('style')
-<!-- CSS Libraries -->
+<!-- CSS Libraries: Hanya perlu satu style untuk DataTables -->
 <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css">
-<link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.bootstrap5.css">
-
-
 @endpush
 
 @section('main')
@@ -36,58 +33,19 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table-striped table cell-border" id="costumers-table">
+                                <table class="table-striped table cell-border" id="vehicle-table">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
+                                            <th>Pemilik</th>
+                                            <th>Brand & Model</th>
+                                            <th>Tahun Pembelian</th>
+                                            <th>Warna</th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($costumers->count() > 0)
-                                        @foreach ($costumers as $key => $costumer )
-                                        <tr>
-                                            <td> {{ $key + 1 }}
-                                            </td>
-                                            <td>
-                                                {{ $costumer['name'] }}
-                                                <div class="table-links">
-                                                    <a href="#">View</a>
-                                                    <div class="bullet"></div>
-                                                    <a href="{{ route('costumers.edit', $costumer->id) }}">Edit</a>
-                                                    <div class="bullet"></div>
-                                                    <a href="#"
-                                                        onclick="event.preventDefault();
-                                                        document.getElementById('delete-form-{{$costumer->id}}').submit();"
-                                                        class="text-danger">Trash</a>
-                                                    <form action="{{route('costumers.destroy', $costumer->id)}}"
-                                                        id="delete-form-{{ $costumer->id}}"
-                                                        style="display: none;"
-                                                        method="POST">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                {{ $costumer->email }}
-                                            </td>
-                                            <td>
-                                                {{ $costumer->phone }}
-                                            </td>
-                                            <td>
-                                                {{ $costumer->address }}
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                        @else
-                                        <tr>
-                                            <td colspan="5" class="text-center">Data Kosong</td>
-                                        </tr>
-                                        @endif
+                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -103,17 +61,26 @@
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.3.5/js/dataTables.bootstrap5.js"></script>
+{{-- Menggunakan dataTables.js standar. dataTables.bootstrap5.js tidak diperlukan jika tidak ada styling Bootstrap tambahan. --}}
 
 <script src="{{ asset('js/page/features-posts.js') }}"></script>
 
 <script>
-    new DataTable('#costumers-table', {
+    // Inisialisasi DataTables dengan terjemahan Bahasa Indonesia lengkap
+    new DataTable('#vehicle-table', {
         paging: true,
+        // Konfigurasi bahasa lengkap agar pesan "Tidak ada data" (zeroRecords) muncul dengan benar.
         language: {
             lengthMenu: "Tampilkan _MENU_ entri",
+            zeroRecords: "Tidak ada data pelanggan yang ditemukan.", // Ini adalah kunci untuk mengatasi pesan kosong
+            info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+            infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
+            infoFiltered: "(disaring dari total _MAX_ entri)",
         },
-        lengthMenu: [[5, 10, 25, 50], [5, 10, 25, 50]],
+        lengthMenu: [
+            [5, 10, 25, 50],
+            [5, 10, 25, 50]
+        ],
     });
 </script>
 @endpush

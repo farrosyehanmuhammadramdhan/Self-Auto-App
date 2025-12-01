@@ -14,6 +14,7 @@ class VehicleMasters extends Model
         'plate_number',
         'engine_number',
         'purchase_year',
+        'wheel',
         'type',
         'color',
     ];  

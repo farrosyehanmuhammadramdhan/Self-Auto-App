@@ -45,7 +45,7 @@
                                     {{-- Input Nama --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label text-md-left">Name</label>
+                                            <label class="col-form-label text-md-left">Nama</label>
                                             <input type="text" name="name" class="form-control" value="{{old('name', $costumers->name)}}">
                                         </div>
                                     </div>
@@ -64,7 +64,7 @@
                                     {{-- Input Phone --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label text-md-left">Phone</label>
+                                            <label class="col-form-label text-md-left">No. HP</label>
                                             <input type="text" name="phone" class="form-control" value="{{old('phone', $costumers->phone)}}">
                                         </div>
                                     </div>
@@ -72,7 +72,7 @@
                                     {{-- Input Address --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label text-md-left">Address</label>
+                                            <label class="col-form-label text-md-left">Alamat</label>
                                             <input type="text" name="address" class="form-control" value="{{old('address', $costumers->address)}} ">
                                         </div>
                                     </div>

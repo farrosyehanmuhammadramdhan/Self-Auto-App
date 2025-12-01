@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('plate_number');
             $table->string('engine_number');
             $table->integer('purchase_year');
+            $table->enum('wheel', ['2', '4'])->default('2');
             $table->string('type');
             $table->string('color');
             $table->timestamps();

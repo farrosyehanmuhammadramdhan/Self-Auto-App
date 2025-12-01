@@ -19,25 +19,22 @@
                 <a href="{{ route('costumers.index') }}"
                     class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Create New Post</h1>
+            <h1>Tambah Pelanggan</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                 <div class="breadcrumb-item"><a href="#">Pelanggan</a></div>
-                <div class="breadcrumb-item">Create New Post</div>
+                <div class="breadcrumb-item">Buat Data Pelanggan</div>
             </div>
         </div>
 
         <div class="section-body">
-            <h2 class="section-title">Create New Post</h2>
-            <p class="section-lead">
-                On this page you can create a new post and fill in all fields.
-            </p>
+            <h2 class="section-title">Tambah Pelanggan</h2>
 
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Write Your Post</h4>
+                            <h4>Form Tambah Data Pelanggan</h4>
                         </div>
                         <form action="{{ route('costumers.store') }}" method="POST">
                             @csrf
@@ -47,7 +44,7 @@
                                     {{-- Input Nama --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label text-md-left">Name</label>
+                                            <label class="col-form-label text-md-left">Nama</label>
                                             <input type="text" name="name" class="form-control">
                                         </div>
                                     </div>
@@ -66,7 +63,7 @@
                                     {{-- Input Phone --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label text-md-left">Phone</label>
+                                            <label class="col-form-label text-md-left">No. HP</label>
                                             <input type="text" name="phone" class="form-control">
                                         </div>
                                     </div>
@@ -74,7 +71,7 @@
                                     {{-- Input Address --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label class="col-form-label text-md-left">Address</label>
+                                            <label class="col-form-label text-md-left">Alamat</label>
                                             <input type="text" name="address" class="form-control">
                                         </div>
                                     </div>
