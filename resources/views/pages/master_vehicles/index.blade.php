@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pelanggan')
+@section('title', 'Kendaraan')
 
 @push('style')
 <!-- CSS Libraries: Hanya perlu satu style untuk DataTables -->
@@ -11,10 +11,10 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Pelanggan</h1>
+            <h1>Kendaraan</h1>
             <div class="section-header-button">
-                <a href="{{ route('costumers.create') }}"
-                    class="btn btn-primary"><i class="fas fa-user-plus"></i> <span>Tambah Pelanggan</span></a>
+                <a href="#"
+                    class="btn btn-primary"><i class="fas fa-plus"></i> <span>Tambah Kendaraan</span></a>
             </div>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
@@ -37,55 +37,16 @@
                                     <thead>
                                         <tr>
                                             <th>No.</th>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>No. Telp</th>
-                                            <th>Alamat</th>
+                                            <th>Pemilik</th>
+                                            <th>Merk & Model</th>
+                                            <th>Tahun Pembelian</th>
+                                            <th>Roda</th>
+                                            <th>Plat Nomor</th>
+                                            <th>Warna</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {{-- 
-                                            DataTables akan menangani tampilan kosong secara otomatis. 
-                                            Kita hanya perlu mengulang data jika ada.
-                                            Blok @else manual dihapus agar tidak mengganggu inisialisasi DataTables.
-                                        --}}
-                                        @if ($costumers->count() > 0)
-                                            @foreach ($costumers as $key => $costumer )
-                                            <tr>
-                                                <td> {{ $key + 1 }}
-                                                </td>
-                                                <td>
-                                                    {{ $costumer->name }}
-                                                    <div class="table-links">
-                                                        <a href="#">View</a>
-                                                        <div class="bullet"></div>
-                                                        <a href="{{ route('costumers.edit', $costumer->id) }}">Edit</a>
-                                                        <div class="bullet"></div>
-                                                        <a href="#"
-                                                            onclick="event.preventDefault();
-                                                            document.getElementById('delete-form-{{$costumer->id}}').submit();"
-                                                            class="text-danger">Trash</a>
-                                                        <form action="{{route('costumers.destroy', $costumer->id)}}"
-                                                            id="delete-form-{{ $costumer->id}}"
-                                                            style="display: none;"
-                                                            method="POST">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                                <td>
-                                                    {{ $costumer->email }}
-                                                </td>
-                                                <td>
-                                                    {{ $costumer->phone }}
-                                                </td>
-                                                <td>
-                                                    {{ $costumer->address }}
-                                                </td>
-                                            </tr>
-                                            @endforeach
-                                        @endif
+                                        
                                     </tbody>
                                 </table>
                             </div>

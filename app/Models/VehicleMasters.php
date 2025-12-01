@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class VehicleMasters extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
         'costumers_id',
         'brand',
@@ -18,4 +21,10 @@ class VehicleMasters extends Model
         'type',
         'color',
     ];  
+
+
+    public function costumers()
+    {
+        return $this->belongsTo(Costumers::class);
+    }
 }
