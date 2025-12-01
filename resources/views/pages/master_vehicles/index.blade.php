@@ -48,8 +48,8 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if ($costumers->count() > 0)    
-                                    @foreach ($costumers as $key => $costumer )
+                                        @if ($costumers->count() > 0)
+                                        @foreach ($costumers as $key => $costumer )
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td>

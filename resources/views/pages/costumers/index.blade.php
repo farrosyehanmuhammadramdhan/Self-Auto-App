@@ -4,8 +4,10 @@
 
 @push('style')
 <!-- CSS Libraries -->
-<link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
 <link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.bootstrap5.css">
+
+
 @endpush
 
 @section('main')
@@ -15,7 +17,7 @@
             <h1>Pelanggan</h1>
             <div class="section-header-button">
                 <a href="{{ route('costumers.create') }}"
-                    class="btn btn-primary">Tambah Pelanggan</a>
+                    class="btn btn-primary"><i class="fas fa-user-plus"></i> <span>Tambah Pelanggan</span></a>
             </div>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
@@ -33,11 +35,8 @@
                             <h4>Daftar Pelanggan</h4>
                         </div>
                         <div class="card-body">
-
-                            <div class="clearfix mb-3"></div>
-
                             <div class="table-responsive">
-                                <table class="table-striped table" id="costumers-table">
+                                <table class="table-striped table cell-border" id="costumers-table">
                                     <thead>
                                         <tr>
                                             <th>No.</th>
@@ -48,18 +47,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    @if ($costumers->count() > 0)    
-                                    @foreach ($costumers as $key => $costumer )
+                                        @if ($costumers->count() > 0)
+                                        @foreach ($costumers as $key => $costumer )
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
+                                            <td> {{ $key + 1 }}
+                                            </td>
                                             <td>
-                                                {{ $costumer->name }}
+                                                {{ $costumer['name'] }}
                                                 <div class="table-links">
                                                     <a href="#">View</a>
                                                     <div class="bullet"></div>
-                                                    <a href="#">Edit</a>
+                                                    <a href="{{ route('costumers.edit', $costumer->id) }}">Edit</a>
                                                     <div class="bullet"></div>
-                                                    <a href="#">Trash</a>
+                                                    <a href="#"
+                                                        onclick="event.preventDefault();
+                                                        document.getElementById('delete-form-{{$costumer->id}}').submit();"
+                                                        class="text-danger">Trash</a>
+                                                    <form action="{{route('costumers.destroy', $costumer->id)}}"
+                                                        id="delete-form-{{ $costumer->id}}"
+                                                        style="display: none;"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
                                                 </div>
                                             </td>
                                             <td>
@@ -91,24 +101,19 @@
 @endsection
 
 @push('scripts')
-<!-- JS Libraies -->
-<script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
+<script src="https://cdn.datatables.net/2.3.5/js/dataTables.bootstrap5.js"></script>
 
-<!-- Page Specific JS File -->
 <script src="{{ asset('js/page/features-posts.js') }}"></script>
 
 <script>
-    $(document).ready(function() {
-        $('#costumers-table').DataTable({
-            "lengthMenu": [
-                [5, 10, 25, 50]
-            ],
-            "language": {
-                "lengthMenu": "Tampilkan _MENU_ entri",
-            }
-        });
+    new DataTable('#costumers-table', {
+        paging: true,
+        language: {
+            lengthMenu: "Tampilkan _MENU_ entri",
+        },
+        lengthMenu: [[5, 10, 25, 50], [5, 10, 25, 50]],
     });
 </script>
 @endpush
