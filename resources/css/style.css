@@ -1,0 +1,276 @@
+/**
+ * Custom CSS untuk Aplikasi Bengkel
+ */
+
+/* Body styling */
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header & Navbar */
+.navbar-brand {
+    font-weight: bold;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    padding: 0 1rem;
+    margin-bottom: 0;
+}
+
+.nav-link {
+    font-weight: 500;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.nav-link.active {
+    font-weight: 700;
+    border-bottom: 3px solid #dc3545;
+}
+
+.dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+/* Main Content */
+.container-fluid.p-0 {
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Container dalam konten */
+.container-fluid.px-3 {
+    margin-top: 20px !important;
+}
+
+/* Judul halaman */
+.page-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 0;
+}
+
+.page-title {
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.page-title i {
+    margin-right: 0.5rem;
+    color: #0d6efd;
+}
+
+/* Card styling */
+.card {
+    margin-bottom: 20px;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+.card-header {
+    font-weight: bold;
+    background-color: #343a40;
+    color: white;
+    border-radius: 10px 10px 0 0 !important;
+}
+
+/* Form styling */
+.form-control:focus {
+    border-color: #343a40;
+    box-shadow: 0 0 0 0.25rem rgba(52, 58, 64, 0.25);
+}
+
+.btn-primary {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: #212529;
+    border-color: #212529;
+}
+
+.btn-outline-primary {
+    color: #343a40;
+    border-color: #343a40;
+}
+
+.btn-outline-primary:hover, .btn-outline-primary:focus {
+    background-color: #343a40;
+    border-color: #343a40;
+}
+
+/* DataTables custom styling */
+.dataTables_wrapper {
+    padding: 20px 0;
+}
+
+.dataTables_filter input {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 5px 10px;
+}
+
+.dataTables_filter input:focus {
+    border-color: #343a40;
+    outline: none;
+}
+
+/* Dashboard cards */
+.dashboard-card {
+    border-left: 5px solid;
+    position: relative;
+    overflow: hidden;
+}
+
+.dashboard-card .dashboard-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2.2rem;
+    opacity: 0.15;
+    z-index: 1;
+}
+
+.dashboard-card .card-body {
+    position: relative;
+    z-index: 2;
+    padding-right: 25px;
+}
+
+.dashboard-card.primary {
+    border-left-color: #007bff;
+}
+
+.dashboard-card.success {
+    border-left-color: #28a745;
+}
+
+.dashboard-card.warning {
+    border-left-color: #ffc107;
+}
+
+.dashboard-card.danger {
+    border-left-color: #dc3545;
+}
+
+.dashboard-card.info {
+    border-left-color: #17a2b8;
+}
+
+/* Login form */
+.login-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.login-form {
+    width: 400px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.login-logo {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Customer and vehicle cards */
+.customer-card, .vehicle-card {
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.customer-card .card-body, .vehicle-card .card-body {
+    padding: 20px;
+}
+
+/* Sparepart cards in sales */
+.sparepart-item {
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sparepart-item:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Receipt / Invoice styling */
+.receipt {
+    padding: 20px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.receipt .receipt-header {
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #dee2e6;
+}
+
+.receipt .receipt-footer {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 10px;
+    border-top: 1px dashed #dee2e6;
+}
+
+/* Print styling */
+@media print {
+    header, footer, .no-print {
+        display: none !important;
+    }
+    
+    body {
+        background-color: white;
+    }
+    
+    .receipt {
+        box-shadow: none;
+        padding: 0;
+    }
+} 

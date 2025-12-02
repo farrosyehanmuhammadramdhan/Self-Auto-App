@@ -1,46 +1,30 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard')
+@section('title', 'Self Auto Dashboard')
 
 @push('style')
-<style>
-    .card-statistic-1 {
-        min-height: 140px;
-        /* ubah tinggi card */
-        display: flex;
-        align-items: center;
-        padding: 20px;
-    }
-
-    .card-statistic-1 .card-icon {
-        width: 80px;
-        /* ukuran kotak icon */
-        height: 80px;
-        font-size: 35px;
-        /* ukuran icon */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .card-statistic-1 .card-body {
-        font-size: 26px;
-        /* ukuran angka */
-        font-weight: bold;
-    }
-</style>
-
+<!-- CSS Libraries -->
+<link rel="stylesheet"
+    href="{{ asset('library/jqvmap/dist/jqvmap.min.css') }}">
+<link rel="stylesheet"
+    href="{{ asset('library/summernote/dist/summernote-bs4.min.css') }}">
+<link rel="stylesheet"
+    href="{{ asset('library/owl.carousel/dist/assets/owl.carousel.min.css') }}">
+<link rel="stylesheet"
+    href="{{ asset('library/owl.carousel/dist/assets/owl.theme.default.min.css') }}">
+<link rel="stylesheet"
+    href="{{ asset('library/flag-icon-css/css/flag-icon.min.css') }}">
 @endpush
 
 @section('main')
+<!-- Main Content -->
 <div class="main-content">
     <section class="section">
-
-        {{-- === BARIS 1 : Pelanggan & Kendaraan === --}}
         <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <!-- Total Pelanggan -->
+                <div class="card card-statistic-2">
+                    <div class="card-icon shadow-primary bg-primary">
                         <i class="fas fa-users"></i>
                     </div>
                     <div class="card-wrap">
@@ -48,133 +32,179 @@
                             <h4>Total Pelanggan</h4>
                         </div>
                         <div class="card-body">
-                            43
-                            <br>
-                            <a href="{{ route('costumers.index') }}"><button class="btn btn-primary btn-sm mt-2">Lihat Data</button></a>
+                            59
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Pendapatan -->
+                <div class="card card-statistic-2">
+                    <div class="card-stats">
+                        <div class="card-stats-title">Total Pendapatan -
+                            <div class="dropdown d-inline">
+                                <a class="font-weight-600 dropdown-toggle"
+                                    data-toggle="dropdown"
+                                    href="#"
+                                    id="orders-month">Hari Ini</a>
+                                <ul class="dropdown-menu dropdown-menu-sm">
+                                    <li class="dropdown-title">Pilih Periode</li>
+                                    <li>
+                                        <a href="#" class="dropdown-item">
+                                            Hari Ini
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="dropdown-item">
+                                            Pekan Ini
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="dropdown-item">
+                                            Bulan Ini
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fa-solid fa-money-bill" style="color: #ffffff;"></i>
+                    </div>
+                    <div class="card-wrap">
+                        <div class="card-header">
+                            <h4>Total Pendapatan</h4>
+                        </div>
+                        <div class="card-body">
+                            Rp.187.000
                         </div>
                     </div>
                 </div>
             </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-info">
-                        <i class="fas fa-motorcycle"></i>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fa-solid fa-motorcycle" style="color: #ffffff;"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Kendaraan</h4>
                         </div>
                         <div class="card-body">
-                            35
-                            <br>
-                            <button class="btn btn-info btn-sm mt-2">Lihat Data</button>
+                            87
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
 
-        {{-- === BARIS 2 : Service & Pendapatan === --}}
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="fas fa-tools"></i>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="card card-statistic-2">
+                    <div class="card-icon shadow-primary bg-primary">
+                        <i class="fa-solid fa-wrench" style="color: #ffffff;"></i>
                     </div>
                     <div class="card-wrap">
                         <div class="card-header">
                             <h4>Total Service</h4>
                         </div>
                         <div class="card-body">
-                            42
-                            <br>
-                            <button class="btn btn-warning btn-sm mt-2">Lihat Data</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 col-md-6 col-sm-12">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-money-bill-wave"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Pendapatan Bulan Ini</h4>
-                        </div>
-                        <div class="card-body">
-                            Rp.120.000
-                            <br>
-                            <button class="btn btn-success btn-sm mt-2">Detail</button>
+                            35
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-
-
-        {{-- ==== BARIS 3 : STOK SPAREPART & SERVICE TERBARU ==== --}}
         <div class="row">
-
-            {{-- ==== STOK SPAREPART MENIPIS ==== --}}
-            <div class="col-lg-6 col-md-12 col-sm-12">
+            <!-- Invoice Pelanggan Service -->
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-exclamation-triangle text-warning"></i> Stok Sparepart Menipis</h4>
+                        <h4>Daftar Invoice Pelanggan</h4>
+                        <div class="card-header-action">
+                            <a href="#" class="btn btn-danger">
+                                Kelola Pelanggan
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-striped mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Kode</th>
-                                        <th>Nama</th>
-                                        <th>Kategori</th>
-                                        <th>Stok</th>
-                                        <th>Aksi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- Data di sini --}}
-                                </tbody>
+                        <div class="table-responsive table-invoice">
+                            <table class="table-striped table">
+                                <tr>
+                                    <th>Tanggal</th>
+                                    <th>Pelanggan</th>
+                                    <th>Kendaraan</th>
+                                    <th>Total</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">23-09-2018</a></td>
+                                    <td class="font-weight-600">Kusnadi</td>
+                                    <td>Mercedes Benz</td>
+                                    <td>Rp.1.200.000</td>
+                                    <td>
+                                        <a href="#"
+                                            class="btn btn-primary">Detail</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
 
-            {{-- ==== SERVICE TERBARU ==== --}}
-            <div class="col-lg-6 col-md-12 col-sm-12">
+            <!-- Stok Barang -->
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4><i class="fas fa-wrench text-primary"></i> Service Terbaru</h4>
+                        <h4>Stok</h4>
+                        <div class="card-header-action">
+                            <a href="#" class="btn btn-danger">
+                                Kelola Stok Barang
+                                <i class="fas fa-chevron-right"></i>
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body p-0">
-                        <div class="table-responsive">
-                            <table class="table table-striped mb-0">
-                                <thead>
-                                    <tr>
-                                        <th>Tanggal</th>
-                                        <th>Pelanggan</th>
-                                        <th>Kendaraan</th>
-                                        <th>Total</th>
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {{-- Data di sini --}}
-                                </tbody>
+                        <div class="table-responsive table-invoice">
+                            <table class="table-striped table">
+                                <tr>
+                                    <th>Kode</th>
+                                    <th>Nama</th>
+                                    <th>Kategori</th>
+                                    <th class="text-center">Jumlah Stok</th>
+                                    <th class="text-center">Status</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                                <tr>
+                                    <td><a href="#">Kode Barang</a></td>
+                                    <td class="font-weight-600">Nama Barang</td>
+                                    <td>Kategori Barang</td>
+                                    <td class="text-center">10</td>
+                                    <td>
+                                        <div class="badge badge-success">Tersedia</div>
+                                    </td>
+                                    <td>
+                                        <a href="#"
+                                            class="btn btn-primary">Detail</a>
+                                    </td>
+                                </tr>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
-
-
     </section>
 </div>
 @endsection
+
+@push('scripts')
+<!-- JS Libraies -->
+<script src="{{ asset('library/jquery-sparkline/jquery.sparkline.min.js') }}"></script>
+<script src="{{ asset('library/chart.js/dist/Chart.js') }}"></script>
+<script src="{{ asset('library/owl.carousel/dist/owl.carousel.min.js') }}"></script>
+<script src="{{ asset('library/summernote/dist/summernote-bs4.min.js') }}"></script>
+<script src="{{ asset('library/chocolat/dist/js/jquery.chocolat.min.js') }}"></script>
+
+<!-- Page Specific JS File -->
+<script src="{{ asset('js/page/index.js') }}"></script>
+@endpush
