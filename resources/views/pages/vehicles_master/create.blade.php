@@ -3,13 +3,8 @@
 @section('title', 'Tambah Kendaraan Master')
 
 @push('style')
-<!-- CSS Libraries -->
-<link rel="stylesheet"
-    href="{{ asset('library/summernote/dist/summernote-bs4.css') }}">
-<link rel="stylesheet"
-    href="{{ asset('library/selectric/public/selectric.css') }}">
-<link rel="stylesheet"
-    href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
+<link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+<link rel="stylesheet" href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 
 @section('main')
@@ -17,158 +12,197 @@
     <section class="section">
         <div class="section-header">
             <div class="section-header-back">
-                <a href="{{ route('vehicle-masters.index') }}"
-                    class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+                <a href="{{ route('vehicle-masters.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
             <h1>Tambah Master Kendaraan</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Kendaraan</a></div>
-                <div class="breadcrumb-item"><a href="#">Kendaraan Master</a></div>
-                <div class="breadcrumb-item"><a href="#">Semua Kendaraan Master</a></div>
+                <div class="breadcrumb-item"><a href="{{ route('vehicle-masters.index') }}">Kendaraan Master</a></div>
                 <div class="breadcrumb-item">Tambah Master Kendaraan</div>
             </div>
         </div>
 
         <div class="section-body">
             <h2 class="section-title">Buat Data Master Kendaraan Baru</h2>
+            <p class="section-lead">
+                Isi Form Ini Untuk Menambahkan Data Master Kendaraan Baru.
+            </p>
             <div class="row">
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
                             <h4>Form Tambah Master Kendaraan</h4>
                         </div>
+
                         <form action="{{ route('vehicle-masters.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
-                                <!-- Nama Pelanggan -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jumlah Roda</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select name="costumer_id" class="form-control selectric" required="required" name="costumer_id" id="costumer_id">
-                                            <option value="0">Pilih Pelanggan</option>
-                                            @foreach ($vehicle_masters as $vehicle_master)
-                                                <option value="{{ $vehicle->costumer->id }}">
-                                                    {{ $vehicle_master->costumer->name }}
-                                                </option>
-                                            @endforeach
-                                        </select>
+                                <div class="row">
+                                    {{-- KOLOM KIRI: INFORMASI KENDARAAN --}}
+                                    <div class="col-md-6">
+                                        <h3>Informasi Kendaraan</h3>
+                                        <hr>
+                                        {{-- 1. Customer (dari Baris Pertama) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nama Pelanggan<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <select name="customer_id" class="form-control select2 @error('customer_id') is-invalid @enderror" required>
+                                                    <option value="">Pilih Pelanggan</option>
+                                                    @foreach ($customers as $customer)
+                                                    <option value="{{ $customer->id }}" {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
+                                                        {{ $customer->name }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('customer_id')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 2. Merk (dari Baris Kedua) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Merk<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="brand" required value="{{ old('brand') }}" class="form-control @error('brand') is-invalid @enderror">
+                                                @error('brand')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 3. Model (dari Baris Ketiga) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Model<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="model" required value="{{ old('model') }}" class="form-control @error('model') is-invalid @enderror">
+                                                @error('model')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 4. Tipe (dari Baris Keempat) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Tipe Kendaraan<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="type" required value="{{ old('type') }}" class="form-control @error('type') is-invalid @enderror">
+                                                @error('type')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 5. Tahun Model (dari Baris Kelima) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Tahun<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="number" name="model_year" required value="{{ old('model_year') }}" class="form-control @error('model_year') is-invalid @enderror">
+                                                @error('model_year')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 6. Jumlah Roda (dari Baris Keenam) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Jumlah Roda<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <select class="form-control selectric @error('wheels') is-invalid @enderror" required name="wheels">
+                                                    <option value="">Pilih Jumlah Roda</option>
+                                                    @foreach ($wheelsOptions as $value => $label)
+                                                    <option value="{{ $value }}" {{ old('wheels') == $value ? 'selected' : '' }}>
+                                                        {{ $label }}
+                                                    </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('wheels')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 7. Nomor Plat (dari Baris Ketujuh) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nomor Plat<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="license_plate" required value="{{ old('license_plate') }}" class="form-control @error('license_plate') is-invalid @enderror">
+                                                @error('license_plate')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 8. Warna Kendaraan (dari Baris Kedelapan) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Warna Kendaraan<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="color" required value="{{ old('color') }}" class="form-control @error('color') is-invalid @enderror">
+                                                @error('color')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                    {{-- KOLOM KANAN: INFORMASI TAMBAHAN --}}
+                                    <div class="col-md-6">
+                                        <h3>Informasi Tambahan</h3>
+                                        <hr>
+                                        {{-- 1. Nomor Rangka (VIN) (dari Baris Pertama) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nomor Rangka (VIN)<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="vin" required value="{{ old('vin') }}" class="form-control @error('vin') is-invalid @enderror">
+                                                @error('vin')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 2. Nomor Mesin (dari Baris Kedua) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nomor Mesin<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="text" name="engine_number" value="{{ old('engine_number') }}" class="form-control @error('engine_number') is-invalid @enderror">
+                                                @error('engine_number')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 3. Tahun Pembelian (dari Baris Ketiga) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Tahun Pembelian<span class="text-danger">*</span></label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <input type="number" name="purchase_year" required value="{{ old('purchase_year') }}" class="form-control @error('purchase_year') is-invalid @enderror">
+                                                @error('purchase_year')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
+
+                                        {{-- 4. Catatan (dari Baris Keempat) --}}
+                                        <div class="form-group row mb-4">
+                                            <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Catatan (Opsional)</label>
+                                            <div class="col-sm-12 col-md-7">
+                                                <textarea name="note" class="form-control @error('note') is-invalid @enderror" style="height: 100px">{{ old('note') }}</textarea>
+                                                @error('note')
+                                                <div class="invalid-feedback">{{ $message }}</div>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <!-- Merk -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Merk</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="brand" required="required"
-                                            class="form-control">
+                                <hr>
+                                {{-- Tombol Simpan (Dipindahkan ke ujung kanan) --}}
+                                <div class="row">
+                                    {{-- Menggunakan d-flex dan justify-content-end untuk memposisikan tombol ke kanan --}}
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-icon icon-left btn-primary"> <i class="fas fa-save"></i> Simpan</button>
                                     </div>
                                 </div>
-
-                                <!-- Model -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Model</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="model" required="required"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Tipe -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tipe Kendaraan</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="type" required="required"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Tahun Model -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tahun Kendaraan</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="number" name="year" required="required numeric"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-
-                                <!-- Jumlah Roda -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Jumlah Roda</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <select class="form-control selectric" required="required" name="wheel">
-                                            <option value="0">Pilih Jumlah Roda</option>
-                                            <option value="2">2 Roda (Motor)</option>
-                                            <option value="3">3 Roda (Bajaj, dll)</option>
-                                            <option value="4">4 Roda (Mobil)</option>
-                                            <option value="6">6 Roda (Truk)</option>
-                                            <option value="8">8 Roda</option>
-                                            <option value="10">10 Roda</option>
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <!-- Nomor Plat -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor Plat</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="plate_number" required="required"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Warna -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Warna Kendaraan</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="color" required="required"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- VIN -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor Rangka (VIN)</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="vin" required="required"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Nomor Mesin -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nomor Mesin</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="engine_number"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Tahun Pembelian -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Tahun Pembelian</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="number" name="purchase_year" required="required numeric"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <!-- Catatan -->
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Catatan</label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <input type="text" name="notes"
-                                            class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="form-group row mb-4">
-                                    <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
-                                    <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-icon icon-left btn-primary"> <i class="fa-solid fa-floppy-disk"></i> Simpan</button>
-                                    </div>
-                                </div>
-
                             </div>
                         </form>
                     </div>
@@ -180,12 +214,15 @@
 @endsection
 
 @push('scripts')
-<!-- JS Libraies -->
-<script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
-<script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
+{{-- Memuat JS Selectric dan Select2 --}}
 <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-<script src="{{ asset('library/upload-preview/upload-preview.js') }}"></script>
+<script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 
-<!-- Page Specific JS File -->
-<script src="{{ asset('js/page/features-post-create.js') }}"></script>
+
+<script>
+    $(document).ready(function() {
+        $('.selectric').selectric();
+        $('.select2').select2();
+    });
+</script>
 @endpush

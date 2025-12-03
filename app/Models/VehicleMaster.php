@@ -9,25 +9,40 @@ class VehicleMaster extends Model
 {
     use HasFactory;
 
-    protected $table = 'vehicle_master';
+    // Nama tabel disesuaikan dengan konvensi laravel (vehicle_masters), 
+    // namun menggunakan nama yang kamu berikan di awal jika kamu tetap ingin menggunakan 'vehicle_master'
+    // protected $table = 'vehicle_master'; 
+    protected $table = 'vehicle_masters'; // Nama ini lebih sesuai dengan Laravel convention
 
     protected $fillable = [
-        'costumer_id',
+        'customer_id', // Koreksi ke customer_id
         'brand',
         'model',
-        'year',
+        'model_year', // Koreksi: Menggunakan model_year sesuai migrasi
         'type',
         'wheels',
         'license_plate',
+        'color',
         'vin',
         'engine_number',
-        'color',
         'purchase_year',
-        'notes'
+        'note' // Koreksi ke 'note' sesuai migrasi
     ];
 
+    /**
+     * Relasi ke Customer.
+     */
     public function customer()
     {
+        // Pastikan nama Model Customer sudah benar (asumsi App\Models\Customer)
         return $this->belongsTo(Customer::class);
     }
+    
+    /**
+     * Casting atribut untuk tipe data. Opsional, tapi bisa membantu.
+     */
+    protected $casts = [
+        'model_year' => 'integer',
+        'purchase_year' => 'integer',
+    ];
 }

@@ -34,7 +34,7 @@
                     class="nav-link has-dropdown"><i class="fas fa-car-side"></i><span>Kendaraan</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('vehicle-masters.index') }}">
                             <i class="fas fa-car-rear"></i><span>Data Master</span>
                         </a>
                     </li>
