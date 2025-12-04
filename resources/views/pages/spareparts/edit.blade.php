@@ -37,24 +37,25 @@
                             <h2 class="section-title">Tambah Sparepart</h2>
                             <p class="section-lead">Tambah data sparepart baru</p>
 
-                            <form action="{{ route('spareparts.store') }}" method="POST">
+                            <form action="{{ route('spareparts.update', $sparepart) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                            <label for="kode_sparepart">Kode Sparepart <span class="text-danger">*</span></label>
+                                            <label for="code">Kode Sparepart <span class="text-danger">*</span></label>
                                             <input type="text" name="code" id="code"
                                                 class="form-control" placeholder="Kode Sparepart" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="nama_sparepart">Nama Sparepart <span class="text-danger">*</span></label>
+                                            <label for="name">Nama Sparepart <span class="text-danger">*</span></label>
                                             <input type="text" name="name" id="name"
                                                 class="form-control" placeholder="Nama Sparepart" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="kategori">Kategori <span class="text-danger">*</span></label>
+                                            <label for="category_id">Kategori <span class="text-danger">*</span></label>
                                             <select name="category_id" class="form-control selectric" required>
                                                 <option value="" selected>Pilih Kategori</option>
                                                     @foreach ($categories as $category)
@@ -65,15 +66,8 @@
                                     </div>
 
                                     <div class="col-md-6">
-
                                         <div class="form-group">
-                                            <label for="stok">Stok <span class="text-danger">*</span></label>
-                                            <input type="number" name="stock" id="stock"
-                                                class="form-control" value="0" min="0" required>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label for="harga_beli">Harga Beli <span class="text-danger">*</span></label>
+                                            <label for="price_buy">Harga Beli <span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Rp</div>
@@ -84,7 +78,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="harga_jual">Harga Jual <span class="text-danger">*</span></label>
+                                            <label for="price_sell">Harga Jual <span class="text-danger">*</span></label>
                                             <div class="input-group">
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Rp</div>

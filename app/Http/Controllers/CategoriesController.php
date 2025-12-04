@@ -36,6 +36,19 @@ class CategoriesController extends Controller
         return redirect()->route('categories.index')->with('success', 'Kategori Berhasil Ditambahkan.');
     }
 
+    public function edit($id){
+        $category = Category::findOrFail($id);
+        return view('pages.categories.edit', compact('category'));
+    }
+
+    public function update(Request $request, $id){
+        $category = Category::findOrFail($id);
+        $category->update([
+            'name' => $request->name,
+        ]);
+        return redirect()->route('categories.index')->with('success', 'Kategori Berhasil Diubah.');
+    }
+
     public function destroy($id){
         $category = Category::findOrFail($id);
         $category->delete();

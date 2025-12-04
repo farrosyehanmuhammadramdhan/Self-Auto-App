@@ -4,8 +4,8 @@
 
 @push('style')
 <!-- CSS Libraries -->
-<link rel="stylesheet"
-    href="{{ asset('library/selectric/public/selectric.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css">
+<link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
 @endpush
 
 @section('main')
@@ -42,85 +42,44 @@
                             <h4>Daftar Spareparts</h4>
                         </div>
                         <div class="card-body">
-                            <div class="float-right">
-                                <form>
-                                    <div class="input-group">
-                                        <input type="text"
-                                            class="form-control"
-                                            placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
 
                             <div class="clearfix mb-3"></div>
 
                             <div class="table-responsive">
-                                <table class="table-striped table">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Spareparts</th>
-                                        <th>Kode</th>
-                                        <th>Kategori</th>
-                                        <th>Stok</th>
-                                        <th>Harga Beli</th>
-                                        <th>Harga Jual</th>
-                                    </tr>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>
-                                            AHM CHAIN LUBE 70 ML
-                                            <div class="table-links">
-                                                <a href="#">Edit</a>
-                                                <div class="bullet"></div>
-                                                <a href="#"
-                                                    class="text-danger">Trash</a>
-                                            </div>
-                                        </td>
-                                        <td>ACL70ML</td>
-                                        <td>General</td>
-                                        <td>3</td>
-                                        <td>Rp 17.100</td>
-                                        <td>Rp 21.000</td>
-                                    </tr>
-                                    
+                                <table class="table-striped table" id="spareparts-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Spareparts</th>
+                                            <th>Kode</th>
+                                            <th>Kategori</th>
+                                            <th>Stok</th>
+                                            <th>Harga Beli</th>
+                                            <th>Harga Jual</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ( $spareparts as $key => $sparepart )
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                {{ $sparepart->name }}
+                                                <div class="table-links">
+                                                    <a href="#">Edit</a>
+                                                    <div class="bullet"></div>
+                                                    <a href="#"
+                                                        class="text-danger">Trash</a>
+                                                </div>
+                                            </td>
+                                            <td>{{ $sparepart->code }}</td>
+                                            <td>{{ $sparepart->category->name }}</td>
+                                            <td>{{ $sparepart->stock }}</td>
+                                            <td>{{ $sparepart->price_buy }}</td>
+                                            <td>{{ $sparepart->price_sell }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
-                            </div>
-                            <div class="float-right">
-                                <nav>
-                                    <ul class="pagination">
-                                        <li class="page-item disabled">
-                                            <a class="page-link"
-                                                href="#"
-                                                aria-label="Previous">
-                                                <span aria-hidden="true">&laquo;</span>
-                                                <span class="sr-only">Previous</span>
-                                            </a>
-                                        </li>
-                                        <li class="page-item active">
-                                            <a class="page-link"
-                                                href="#">1</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link"
-                                                href="#">2</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link"
-                                                href="#">3</a>
-                                        </li>
-                                        <li class="page-item">
-                                            <a class="page-link"
-                                                href="#"
-                                                aria-label="Next">
-                                                <span aria-hidden="true">&raquo;</span>
-                                                <span class="sr-only">Next</span>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </nav>
                             </div>
                         </div>
                     </div>
@@ -137,4 +96,34 @@
 
 <!-- Page Specific JS File -->
 <script src="{{ asset('js/page/features-posts.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
+<script>
+    $(document).ready(function() {
+        // Inisialisasi DataTables
+        $('#spareparts-table').DataTable({
+            // Konfigurasi Paging dan Length Menu
+            paging: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Semua"]
+            ],
+
+            // Terjemahan Bahasa Indonesia
+            language: {
+                lengthMenu: "Tampilkan _MENU_ entri",
+                zeroRecords: "Tidak ada data pelanggan yang ditemukan.",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
+                infoFiltered: "(disaring dari total _MAX_ entri)",
+                search: "Cari",
+
+            },
+            // Urutan default (opsional)
+            order: [
+                [0, 'asc']
+            ],
+        });
+    });
+</script>
 @endpush

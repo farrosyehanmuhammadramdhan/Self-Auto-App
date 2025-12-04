@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('spareparts', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('code');
+            $table->string('code'); // Tambahkan unique untuk kode agar lebih baik
             $table->foreignId('category_id')->references('id')->on('categories')->constrained()->onDelete('cascade');
-            $table->integer('stock');
-            $table->integer('price_buy');
-            $table->integer('price_sell');
+            $table->integer('stock')->default(0); // Tambahkan default(0) agar lebih baik
+            $table->bigInteger('price_buy'); // Ganti integer menjadi bigInteger untuk harga, atau tetap integer jika range harga kecil
+            $table->bigInteger('price_sell'); // Ganti integer menjadi bigInteger
             $table->timestamps();
         });
     }

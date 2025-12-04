@@ -52,7 +52,7 @@
                         </a>
                     </li>
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('spareparts.index') }}">
                             <i class="fas fa-gears"></i><span>Data Spareparts</span>
                         </a>
                     </li>

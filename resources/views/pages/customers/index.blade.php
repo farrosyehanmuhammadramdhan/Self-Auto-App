@@ -14,7 +14,6 @@
         <div class="section-header">
             <h1>Data Pelanggan</h1>
             <div class="section-header-button">
-                {{-- Menggunakan rute yang konsisten: customers.create --}}
                 <a href="{{ route('customers.create') }}" class="btn btn-primary">
                     <i class="fas fa-user-plus"></i> Tambah Pelanggan
                 </a>
@@ -24,17 +23,8 @@
                 <div class="breadcrumb-item">Daftar Data Pelanggan</div>
             </div>
         </div>
-        
-        {{-- Menampilkan Alert dari session --}}
-        @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                {!! session('success') !!}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-        @endif
 
+        @include('layouts.alert')
         <div class="section-body">
             <h2 class="section-title">Data Pelanggan</h2>
             <p class="section-lead">
@@ -48,10 +38,7 @@
                             <h4>Daftar Pelanggan</h4>
                         </div>
                         <div class="card-body">
-                            {{-- Menghilangkan form pencarian manual karena DataTables sudah memiliki fitur pencarian --}}
-
                             <div class="clearfix mb-3"></div>
-
                             <div class="table-responsive">
                                 {{-- Pastikan ID tabel adalah 'customers-table' --}}
                                 <table class="table table-bordered table-md" id="customers-table" style="width:100%">
@@ -62,43 +49,35 @@
                                             <th>Email</th>
                                             <th>No. HP</th>
                                             <th>Alamat</th>
-                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($customers as $customer)
+                                        @foreach($customers as $key => $customer)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $customer->name }}</td>
-                                            <td>{{ $customer->email }}</td>
-                                            <td>{{ $customer->phone ?? '-' }}</td>
-                                            <td>{{ $customer->address ?? '-' }}</td>
-                                            <td class="text-center">
-                                                <div class="btn-group">
-                                                    {{-- Tautan View --}}
-                                                    <a href="{{ route('customers.show', $customer->id) }}"
-                                                        class="btn btn-sm btn-info" title="Lihat">
-                                                        <i class="fas fa-eye"></i>
-                                                    </a>
-                                                    {{-- Tautan Edit --}}
-                                                    <a href="{{ route('customers.edit', $customer->id) }}"
-                                                        class="btn btn-sm btn-primary" title="Edit">
-                                                        <i class="fas fa-edit"></i>
-                                                    </a>
-                                                    
-                                                    {{-- Form Delete --}}
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>
+                                                {{ $customer->name }}
+                                                <div class="table-links">
+                                                    <a href="{{ route('customers.show', $customer->id) }}">Show</a>
+                                                    <div class="bullet"></div>
+                                                    <a href="{{ route('customers.edit', $customer->id) }}">Edit</a>
+                                                    <div class="bullet"></div>
+                                                    <a href="#"
+                                                        onclick="event.preventDefault(); 
+                                                document.getElementById('delete-form-{{ $customer->id }}').submit();"
+                                                        class="text-danger">Trash</a>
                                                     <form action="{{ route('customers.destroy', $customer->id) }}"
-                                                        method="POST"
-                                                        class="d-inline"
-                                                        onsubmit="return confirm('Apakah Anda yakin ingin menghapus pelanggan {{ $customer->name }}?');">
+                                                        id="delete-form-{{ $customer->id }}"
+                                                        style="display: none;"
+                                                        method="POST">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger" title="Hapus">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
                                                     </form>
                                                 </div>
                                             </td>
+                                            <td>{{ $customer->email }}</td>
+                                            <td>{{ $customer->phone ?? '-' }}</td>
+                                            <td>{{ $customer->address ?? '-' }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -130,7 +109,7 @@
                 [10, 25, 50, -1],
                 [10, 25, 50, "Semua"]
             ],
-            
+
             // Terjemahan Bahasa Indonesia
             language: {
                 lengthMenu: "Tampilkan _MENU_ entri",
@@ -139,10 +118,12 @@
                 infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
                 infoFiltered: "(disaring dari total _MAX_ entri)",
                 search: "Cari",
-                
+
             },
             // Urutan default (opsional)
-            order: [[0, 'asc']],
+            order: [
+                [0, 'asc']
+            ],
         });
     });
 </script>

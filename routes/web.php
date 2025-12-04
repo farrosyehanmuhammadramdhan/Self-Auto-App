@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\VehicleMasterController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\SparepartsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,8 @@ use App\Http\Controllers\CategoriesController;
 Route::resource('customers', CustomerController::class);
 Route::resource('vehicle-masters', VehicleMasterController::class);
 Route::resource('categories', CategoriesController::class);
+Route::resource('spareparts', SparepartsController::class);
+
 
 Route::get('/dashboard', function () {
     return view('pages.dashboard.index');

@@ -4,8 +4,8 @@
 
 @push('style')
 <!-- CSS Libraries -->
-<link rel="stylesheet"
-    href="{{ asset('library/selectric/public/selectric.css') }}">
+<link rel="stylesheet" href="{{ asset('library/selectric/public/selectric.css') }}">
+<link rel="stylesheet" href="https://cdn.datatables.net/2.3.5/css/dataTables.dataTables.css">
 @endpush
 
 @section('main')
@@ -42,60 +42,46 @@
                             <h4>Daftar Kategori</h4>
                         </div>
                         <div class="card-body">
-                            <div class="float-right">
-                                <form>
-                                    <div class="input-group">
-                                        <input type="text"
-                                            class="form-control"
-                                            placeholder="Search">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary"><i class="fas fa-search"></i></button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
 
                             <div class="clearfix mb-3"></div>
 
                             <div class="table-responsive">
-                                <table class="table-striped table">
-                                    <tr>
-                                        <th>No</th>
-                                        <th>Nama Kategori</th>
-                                        <th>Dibuat Pada</th>
-                                        <th>Diperbarui Pada</th>
-                                    </tr>
-                                    @if ($categories->count() > 0)
-                                    @foreach ($categories as $category)
-                                    <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>
-                                            {{ $category->name }}
-                                            <div class="table-links">
-                                                <a href="#">Edit</a>
-                                                <div class="bullet"></div>
-                                                <a href="#"
-                                                onclick="event.preventDefault(); 
+                                <table class="table table-bordered table-md" id="categories-table">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Kategori</th>
+                                            <th>Dibuat Pada</th>
+                                            <th>Diperbarui Pada</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($categories as $category)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                {{ $category->name }}
+                                                <div class="table-links">
+                                                    <a href="{{ route('categories.edit', $category->id) }}">Edit</a>
+                                                    <div class="bullet"></div>
+                                                    <a href="#"
+                                                        onclick="event.preventDefault(); 
                                                 document.getElementById('delete-form-{{ $category->id }}').submit();"
-                                                    class="text-danger">Trash</a>
-                                                <form action="{{ route('categories.destroy', $category->id) }}" 
-                                                    id="delete-form-{{ $category->id }}"
-                                                    style="display: none;" 
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                </form>
-                                            </div>
-                                        </td>
-                                        <td>{{ $category->created_at }}</td>
-                                        <td>{{ $category->updated_at }}</td>
-                                    </tr>
-                                    @endforeach
-                                    @else
-                                    <tr>
-                                        <td colspan="4" class="text-center">Tidak ada data</td>
-                                    </tr>
-                                    @endif
+                                                        class="text-danger">Trash</a>
+                                                    <form action="{{ route('categories.destroy', $category->id) }}"
+                                                        id="delete-form-{{ $category->id }}"
+                                                        style="display: none;"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                    </form>
+                                                </div>
+                                            </td>
+                                            <td>{{ $category->created_at }}</td>
+                                            <td>{{ $category->updated_at }}</td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
                                 </table>
                             </div>
                             <div class="float-right">
@@ -118,4 +104,35 @@
 
 <!-- Page Specific JS File -->
 <script src="{{ asset('js/page/features-posts.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
+
+<script>
+    $(document).ready(function() {
+        // Inisialisasi DataTables
+        $('#categories-table').DataTable({
+            // Konfigurasi Paging dan Length Menu
+            paging: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Semua"]
+            ],
+
+            // Terjemahan Bahasa Indonesia
+            language: {
+                lengthMenu: "Tampilkan _MENU_ entri",
+                zeroRecords: "Tidak ada data pelanggan yang ditemukan.",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
+                infoFiltered: "(disaring dari total _MAX_ entri)",
+                search: "Cari",
+
+            },
+            // Urutan default (opsional)
+            order: [
+                [0, 'asc']
+            ],
+        });
+    });
+</script>
 @endpush
