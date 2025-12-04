@@ -47,7 +47,7 @@
                     class="nav-link has-dropdown"><i class="fas fa-gears"></i><span>Spareparts</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('categories.index') }}">
                             <i class="fa-solid fa-tags"></i><span>Kategori</span>
                         </a>
                     </li>
