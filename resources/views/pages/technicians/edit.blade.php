@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Teknisi')
+@section('title', 'Edit Teknisi')
 
 @push('style')
     <link rel="stylesheet"
@@ -19,32 +19,36 @@
                     <a href="{{ route('technicians.index') }}"
                         class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
                 </div>
-                <h1>Tambah Teknisi</h1>
+                <h1>Edit Teknisi</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Teknisi</a></div>
                     <div class="breadcrumb-item"><a href="#">Data Teknisi</a></div>
                     <div class="breadcrumb-item"><a href="#">Daftar Data Teknisi</a></div>
-                    <div class="breadcrumb-item">Tambah Teknisi</div>
+                    <div class="breadcrumb-item">Edit Teknisi</div>
                 </div>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Tambah Teknisi</h2>
+                <h2 class="section-title">Edit Teknisi</h2>
 
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Form Tambah Teknisi</h4>
+                                <h4>Form Edit Teknisi</h4>
                             </div>
-                            <form action="{{ route('technicians.store') }}" method="POST">
+                            {{-- Action mengarah ke route update dengan id teknisi --}}
+                            <form action="{{ route('technicians.update', $technician->id) }}" method="POST"> 
                                 @csrf
+                                @method('PUT') {{-- Metode untuk UPDATE --}}
                                 <div class="card-body">
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Nama Teknisi</label>
                                     <div class="col-sm-12 col-md-7">
+                                        {{-- Isi dengan data yang sudah ada --}}
                                         <input type="text" name="name" id="name" required=""
-                                            class="form-control @error('name') is-invalid @enderror" value="{{ old('name') }}">
+                                            class="form-control @error('name') is-invalid @enderror" 
+                                            value="{{ old('name', $technician->name) }}">
                                         @error('name')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -57,7 +61,7 @@
                                             class="form-control @error('skill') is-invalid @enderror"
                                             name="skill"
                                             data-height="150"
-                                            required="">{{ old('skill') }}</textarea>
+                                            required="">{{ old('skill', $technician->skill) }}</textarea>
                                         @error('skill')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -66,10 +70,10 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3">Status</label>
                                     <div class="col-sm-12 col-md-7">
-                                        {{-- Mengubah name menjadi 'is_active' dan value menjadi 1/0 --}}
+                                        {{-- Menggunakan 'is_active' dan memeriksa nilai boolean (1/0) --}}
                                         <select name="is_active" class="form-control selectric @error('is_active') is-invalid @enderror">
-                                            <option value="1" {{ old('is_active') == '1' ? 'selected' : '' }}>Aktif</option>
-                                            <option value="0" {{ old('is_active') == '0' ? 'selected' : '' }}>Tidak Aktif</option>
+                                            <option value="1" {{ old('is_active', $technician->is_active) == '1' ? 'selected' : '' }}>Aktif</option>
+                                            <option value="0" {{ old('is_active', $technician->is_active) == '0' ? 'selected' : '' }}>Tidak Aktif</option>
                                         </select>
                                         @error('is_active')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -79,7 +83,7 @@
                                 <div class="form-group row mb-4">
                                     <label class="col-form-label text-md-right col-12 col-md-3 col-lg-3"></label>
                                     <div class="col-sm-12 col-md-7">
-                                        <button class="btn btn-icon icon-left btn-primary"> <i class="fa-solid fa-floppy-disk"></i> Simpan</button>
+                                        <button class="btn btn-icon icon-left btn-primary"> <i class="fas fa-save"></i> Perbarui</button>
                                     </div>
                                 </div>
                                 </div>
