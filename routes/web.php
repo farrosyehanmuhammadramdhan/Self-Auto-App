@@ -7,6 +7,7 @@ use App\Http\Controllers\VehicleMasterController;
 use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\SparepartsController;
 use App\Http\Controllers\TechniciansController;
+use App\Http\Controllers\SalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,6 +25,7 @@ Route::resource('vehicle-masters', VehicleMasterController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('spareparts', SparepartsController::class);
 Route::resource('technicians', TechniciansController::class);
+Route::resource('sales', SalesController::class);
 
 
 Route::get('/dashboard', function () {
