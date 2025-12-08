@@ -88,7 +88,7 @@
                     class="nav-link has-dropdown"><i class="fas fa-user-gear"></i><span>Teknisi</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('technicians.index') }}">
                             <i class="fas fa-list"></i><span>Data Teknisi</span>
                         </a>
                     </li>
@@ -108,7 +108,7 @@
 
             <!-- Penjualan -->
             <li class="nav-item dropdown">
-                <a href="#"
+                <a href="{{ route('sales.index') }}"
                     class="nav-link"><i class="fas fa-cart-shopping"></i><span>Penjualan</span></a>
             </li>
 

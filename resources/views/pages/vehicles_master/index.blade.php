@@ -59,7 +59,8 @@
                                         <tr>
                                             <th>No</th>
                                             <th>Nama Pemilik</th>
-                                            <th>Merk & Model</th>
+                                            <th>Merk</th>
+                                            <th>Model</th>
                                             <th>Tahun Pembelian</th>
                                             <th>Roda</th>
                                             <th>Plat Nomor</th>
@@ -68,9 +69,9 @@
                                     </thead>
                                     <tbody>
                                         {{-- Menggunakan $loop->iteration untuk penomoran sederhana yang kompatibel dengan DataTables --}}
-                                        @foreach ($vehicle_masters as $vehicle_master)
+                                        @foreach ($vehicle_masters as $key => $vehicle_master)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $key + 1 }}</td>
                                             <td>
                                                 {{ $vehicle_master->customer->name ?? 'N/A' }}
                                                 <div class="table-links">
@@ -91,11 +92,12 @@
                                                     </form>
                                                 </div>
                                             </td>
-                                            <td>{{ $vehicle_master->brand }} - {{ $vehicle_master->model }}</td>
+                                            <td>{{ $vehicle_master->brand }}</td>
+                                            <td>{{ $vehicle_master->model }}</td>
                                             <td>{{ $vehicle_master->purchase_year }}</td>
                                             <td>{{ $vehicle_master->wheels }}</td>
                                             <td>{{ $vehicle_master->license_plate }}</td>
-                                            <td>{{ $vehicle_master->color }}</td>
+                                            <td>{{ $vehicle_master->color ?? 'N/A' }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -114,8 +116,8 @@
 
 @push('scripts')
 {{-- Memastikan jQuery dan DataTables JS dimuat --}}
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
+<script src="{{ asset('js/page/index.js') }}"></script>
 <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
 
 <script>

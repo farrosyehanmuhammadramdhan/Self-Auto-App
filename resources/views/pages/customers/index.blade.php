@@ -95,8 +95,9 @@
 
 @push('scripts')
 {{-- Memastikan jQuery dan DataTables JS dimuat --}}
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
+<script src="{{ asset('js/page/index.js') }}"></script>
+<script src="{{ asset('js/page/features-posts.js') }}"></script>
 <script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
 
 <script>
