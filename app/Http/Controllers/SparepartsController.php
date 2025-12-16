@@ -37,8 +37,9 @@ class SparepartsController extends Controller
     public function create()
     {
         // Ambil semua kategori untuk dropdown
-        $categories = Category::orderBy('name')->get();
+        $categories = Category::all();
         return view('pages.spareparts.create', compact('categories'));
+        
     }
 
     /**
@@ -76,9 +77,9 @@ class SparepartsController extends Controller
      */
     public function edit(Sparepart $sparepart) // Gunakan Route Model Binding
     {
-        $categories = Category::orderBy('name')->get(); // Ambil semua kategori
+        $categories = Category::all(); // Ambil semua kategori
         // Dengan Route Model Binding, $sparepart sudah berisi data yang dicari
-        return view('pages.spareparts.edit', compact('sparepart', 'categories'));
+        return view('pages.spareparts.edit', compact('categories'));
     }
 
     /**

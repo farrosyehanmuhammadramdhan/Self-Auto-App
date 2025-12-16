@@ -8,6 +8,8 @@ use App\Http\Controllers\CategoriesController;
 use App\Http\Controllers\SparepartsController;
 use App\Http\Controllers\TechniciansController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ServiceMasterController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,11 +28,8 @@ Route::resource('categories', CategoriesController::class);
 Route::resource('spareparts', SparepartsController::class);
 Route::resource('technicians', TechniciansController::class);
 Route::resource('sales', SalesController::class);
-
-
-Route::get('/dashboard', function () {
-    return view('pages.dashboard.index');
-})->name('dashboard');
+Route::resource('dashboard', DashboardController::class);
+Route::resource('services-masters', ServiceMasterController::class);
 
 
 Route::get('/login', function () {

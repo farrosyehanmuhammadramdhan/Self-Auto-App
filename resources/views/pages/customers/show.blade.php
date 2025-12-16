@@ -45,15 +45,6 @@
                                 <div class="col-md-9">: {{ $customer->address ?? '-' }}</div>
                             </div>
                             <hr>
-                            <div class="row">
-                                <div class="col-md-3 font-weight-bold">Dibuat Pada</div>
-                                <div class="col-md-9">: {{ $customer->created_at->format('d F Y H:i') }}</div>
-                            </div>
-                            <hr>
-                            <div class="row">
-                                <div class="col-md-3 font-weight-bold">Diperbarui Pada</div>
-                                <div class="col-md-9">: {{ $customer->updated_at->format('d F Y H:i') }}</div>
-                            </div>
                         </div>
                         <div class="card-footer text-right">
                             <a href="{{ route('customers.edit', $customer) }}" class="btn btn-warning"><i class="fas fa-edit"></i> Edit Data</a>

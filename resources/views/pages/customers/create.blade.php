@@ -28,27 +28,21 @@
                         <div class="card-header">
                             <h4>Form Tambah Pelanggan</h4>
                         </div>
-                        
-                        {{-- PERBAIKAN: Mengganti action ke route yang benar --}}
                         <form action="{{ route('customers.store') }}" method="POST">
                             @csrf
                             <div class="card-body">
-
-                                {{-- ============================================= --}}
-                                {{-- BARIS PERTAMA: Nama dan Email (Dua Kolom)     --}}
-                                {{-- ============================================= --}}
                                 <div class="row">
                                     {{-- Kolom Kiri (Nama) --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="name">Nama</label>
-                                            <input type="text" name="name" 
-                                                class="form-control @error('name') is-invalid @enderror" 
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
                                                 value="{{ old('name') }}" required>
                                             @error('name')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                             @enderror
                                         </div>
                                     </div>
@@ -57,33 +51,30 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="email">Email</label>
-                                            <input type="email" name="email" 
-                                                class="form-control @error('email') is-invalid @enderror" 
+                                            <input type="email" name="email"
+                                                class="form-control @error('email') is-invalid @enderror"
                                                 value="{{ old('email') }}" required>
                                             @error('email')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
-                                
-                                {{-- ================================================= --}}
-                                {{-- BARIS KEDUA: No. HP dan Alamat (Dua Kolom)        --}}
-                                {{-- ================================================= --}}
+
                                 <div class="row">
                                     {{-- Kolom Kiri (No. HP) --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="phone">No. HP</label>
-                                            <input type="text" name="phone" 
-                                                class="form-control @error('phone') is-invalid @enderror" 
+                                            <input type="text" name="phone"
+                                                class="form-control @error('phone') is-invalid @enderror"
                                                 value="{{ old('phone') }}">
                                             @error('phone')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                             @enderror
                                         </div>
                                     </div>
@@ -97,21 +88,16 @@
                                                 name="address"
                                                 data-height="150">{{ old('address') }}</textarea>
                                             @error('address')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                             @enderror
                                         </div>
                                     </div>
                                 </div>
 
-
-                                {{-- ============================================= --}}
-                                {{-- BARIS AKSI: Tombol Simpan (Satu Baris Penuh)  --}}
-                                {{-- ============================================= --}}
                                 <div class="form-group row mb-4">
-                                    <div class="col-12 text-right"> 
-                                        {{-- Gunakan col-12 dan text-right agar tombol di kanan --}}
+                                    <div class="col-12 text-right">
                                         <button type="submit" class="btn btn-icon icon-left btn-primary"> <i class="fas fa-save"></i> Simpan</button>
                                     </div>
                                 </div>

@@ -29,7 +29,7 @@
                             <h4>Total Pelanggan</h4>
                         </div>
                         <div class="card-body">
-                            59
+                            {{ $customers }}
                         </div>
                     </div>
                 </div>
@@ -45,7 +45,7 @@
                             <h4>Total Kendaraan</h4>
                         </div>
                         <div class="card-body">
-                            87
+                            {{ $vehicles }}
                         </div>
                     </div>
                 </div>
@@ -90,10 +90,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Stok</h4>
+                        <h4>Stok Spareparts Menipis</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-danger">
-                                Kelola Stok Barang
+                            <a href="{{ route('spareparts.index') }}" class="btn btn-danger">
+                                Kelola Spareparts
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </div>
@@ -105,9 +105,8 @@
                                     <th>Kode</th>
                                     <th>Nama</th>
                                     <th>Kategori</th>
-                                    <th class="text-center">Jumlah Stok</th>
-                                    <th class="text-center">Status</th>
-                                    <th class="text-center">Action</th>
+                                    <th class="text-center">Stok</th>
+                                    <th></th>
                                 </tr>
                                 <tr>
                                     <td><a href="#">Kode Barang</a></td>
@@ -115,11 +114,8 @@
                                     <td>Kategori Barang</td>
                                     <td class="text-center">10</td>
                                     <td>
-                                        <div class="badge badge-success">Tersedia</div>
-                                    </td>
-                                    <td>
                                         <a href="#"
-                                            class="btn btn-primary">Detail</a>
+                                            class="btn btn-primary"><i class="fas fa-pen-to-square"></i></a>
                                     </td>
                                 </tr>
                             </table>
@@ -131,10 +127,10 @@
             <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4>Daftar Invoice Pelanggan</h4>
+                        <h4>Service Terbaru</h4>
                         <div class="card-header-action">
                             <a href="#" class="btn btn-danger">
-                                Kelola Pelanggan
+                                Kelola Service
                                 <i class="fas fa-chevron-right"></i>
                             </a>
                         </div>
@@ -147,7 +143,7 @@
                                     <th>Pelanggan</th>
                                     <th>Kendaraan</th>
                                     <th>Total</th>
-                                    <th>Action</th>
+                                    <th></th>
                                 </tr>
                                 <tr>
                                     <td><a href="#">23-09-2018</a></td>
@@ -156,7 +152,7 @@
                                     <td>Rp.1.200.000</td>
                                     <td>
                                         <a href="#"
-                                            class="btn btn-primary">Detail</a>
+                                            class="btn btn-primary"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             </table>

@@ -10,7 +10,7 @@
             <li class="menu-header">Menu</li>
             <!-- Dashboard -->
             <li class="nav-item dropdown">
-                <a href="{{ route('dashboard') }}" class="nav-link">
+                <a href="{{ route('dashboard.index') }}" class="nav-link">
                     <i class="fas fa-dashboard"></i><span>Dashboard</span>
                 </a>
             </li>
@@ -70,13 +70,13 @@
                     class="nav-link has-dropdown"><i class="fas fa-wrench"></i><span>Servis</span></a>
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
-                            <i class="fa-solid fa-screwdriver-wrench"></i><span>Data Servis</span>
+                        <a class="nav-link" href="{{ route('services-masters.index') }}">
+                            <i class="fa-solid fa-screwdriver-wrench"></i><span>Master Servis</span>
                         </a>
                     </li>
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
                         <a class="nav-link" href="#">
-                            <i class="fa-solid fa-truck-medical"></i><span>Darurat</span>
+                            <i class="fa-solid fa-screwdriver"></i><span>Data Servis</span>
                         </a>
                     </li>
                 </ul>

@@ -11,6 +11,8 @@
     href="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.css') }}">
 <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link rel="stylesheet"
+    href="{{ asset('library/select2/dist/css/select2.min.css') }}">
 @endpush
 
 @section('main')
@@ -48,19 +50,25 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="nama_sparepart">Nama Sparepart <span class="text-danger">*</span></label>
+                                            <label>Nama Sparepart <span class="text-danger">*</span></label>
                                             <input type="text" name="name" id="name"
                                                 class="form-control" placeholder="Nama Sparepart" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="kategori">Kategori <span class="text-danger">*</span></label>
-                                            <select name="category_id" class="form-control selectric" required>
-                                                <option value="" selected>Pilih Kategori</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
+                                            <label>Kategori <span class="text-danger">*</span></label>
+                                            <select name="category_id"
+                                                class="form-control select2 @error('category_id') is-invalid @enderror" required>
+                                                <option value="">Pilih Kategori</option>
+                                                @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">
+                                                    {{ $category->name }}
+                                                </option>
+                                                @endforeach
                                             </select>
+                                            @error('category_id')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                            @enderror
                                         </div>
                                     </div>
 
@@ -114,10 +122,13 @@
 @endsection
 
 @push('scripts')
-<script src="{{ asset('library/summernote/dist/summernote-bs4.js') }}"></script>
-<script src="{{ asset('library/bootstrap-tagsinput/dist/bootstrap-tagsinput.min.js') }}"></script>
-<script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script>
-<script src="{{ asset('library/upload-preview/upload-preview.js') }}"></script>
+<script src="{{ asset('library/selectric/public/jquery.selectric.min.js') }}"></script> 
+<script src="{{ asset('library/select2/dist/js/select2.full.min.js') }}"></script>
 
-<script src="{{ asset('js/page/features-post-create.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('.selectric').selectric();
+        $('.select2').select2();
+    });
+</script>
 @endpush

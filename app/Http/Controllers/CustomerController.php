@@ -22,8 +22,8 @@ class CustomerController extends Controller
                 $query->where('name', 'like', '%' . request('search') . '%')
                     ->orWhere('email', 'like', '%' . request('search') . '%');
             })
-            ->orderBy('id', 'desc') // Tampilkan yang terbaru di atas
-            ->paginate(10); // Ambil 10 data per halaman
+            ->orderBy('id', 'desc')
+            ->paginate(10);
         
         // PERBAIKAN: Mengubah nama view agar konsisten dengan rute dan controller
         return view('pages.customers.index', compact('customers'));

@@ -107,8 +107,8 @@
             // Konfigurasi Paging dan Length Menu
             paging: true,
             lengthMenu: [
-                [10, 25, 50, -1],
-                [10, 25, 50, "Semua"]
+                [5, 10, 25, 50, -1],
+                [5, 10, 25, 50, "Semua"]
             ],
 
             // Terjemahan Bahasa Indonesia

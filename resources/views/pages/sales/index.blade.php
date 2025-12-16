@@ -14,7 +14,7 @@
         <div class="section-header">
             <h1>Data Penjualan</h1>
             <div class="section-header-button">
-                <a href="{{ route('customers.create') }}" class="btn btn-primary">
+                <a href="{{ route('sales.create') }}" class="btn btn-primary">
                     Tambah Penjualan
                 </a>
             </div>
@@ -59,8 +59,7 @@
                                                 <div class="table-links">
                                                     <a href="#">Show</a>
                                                     <div class="bullet"></div>
-                                                    <a href="#">Edit</a>
-                                                    <div class="bullet"></div>
+                                                    <a href="#">Print</a>
                                                 </div>
                                             </td>
                                             <td>{{ $sale->customer->name }}</td>

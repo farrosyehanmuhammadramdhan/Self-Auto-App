@@ -46,7 +46,7 @@
                             <div class="clearfix mb-3"></div>
 
                             <div class="table-responsive">
-                                <table class="table-striped table" id="spareparts-table">
+                                <table class="table-striped table table-bordered" id="spareparts-table">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -74,8 +74,8 @@
                                             <td>{{ $sparepart->code }}</td>
                                             <td>{{ $sparepart->category->name }}</td>
                                             <td>{{ $sparepart->stock }}</td>
-                                            <td>{{ $sparepart->price_buy }}</td>
-                                            <td>{{ $sparepart->price_sell }}</td>
+                                            <td>{{ "Rp. " . number_format($sparepart->price_buy, 0, ',', '.') }}</td>
+                                            <td>{{ "Rp. " . number_format($sparepart->price_sell, 0, ',', '.') }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

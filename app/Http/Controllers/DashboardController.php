@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Customer;
+use App\Models\VehicleMaster;
+use App\Models\SparePart;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        return view('pages.dashboard.index');
+        $customers = Customer::count();
+        $vehicles = VehicleMaster::count();
+        $spareparts = SparePart::query()->where('stock', '>', 0)->get();
+        return view('pages.dashboard.index', compact('customers', 'vehicles', 'spareparts'));
     }
 }

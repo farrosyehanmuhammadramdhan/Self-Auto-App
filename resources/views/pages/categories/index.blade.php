@@ -46,7 +46,7 @@
                             <div class="clearfix mb-3"></div>
 
                             <div class="table-responsive">
-                                <table class="table table-bordered table-md" id="categories-table">
+                                <table class="table table-bordered table-striped table-md" id="categories-table">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -56,9 +56,9 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
+                                        @foreach ($categories as $key => $category)
                                         <tr>
-                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $key + 1 }}</td>
                                             <td>
                                                 {{ $category->name }}
                                                 <div class="table-links">
