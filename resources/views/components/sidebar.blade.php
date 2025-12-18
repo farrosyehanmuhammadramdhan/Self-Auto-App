@@ -71,12 +71,12 @@
                 <ul class="dropdown-menu">
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('services-masters.index') }}">
-                            <i class="fa-solid fa-screwdriver-wrench"></i><span>Master Servis</span>
+                            <i class="fa-solid fa-toolbox"></i><span>Master Servis</span>
                         </a>
                     </li>
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
-                            <i class="fa-solid fa-screwdriver"></i><span>Data Servis</span>
+                        <a class="nav-link" href="{{ route('services.index') }}">
+                            <i class="fa-solid fa-screwdriver-wrench"></i><span>Data Servis</span>
                         </a>
                     </li>
                 </ul>

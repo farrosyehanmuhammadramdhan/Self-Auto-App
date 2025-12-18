@@ -108,16 +108,17 @@
                                     <th class="text-center">Stok</th>
                                     <th></th>
                                 </tr>
+                                @foreach ($spareparts as $sparepart)
                                 <tr>
-                                    <td><a href="#">Kode Barang</a></td>
-                                    <td class="font-weight-600">Nama Barang</td>
-                                    <td>Kategori Barang</td>
-                                    <td class="text-center">10</td>
+                                    <td>{{ $sparepart->code }}</td>
+                                    <td class="font-weight-200">{{ $sparepart->name }}</td>
+                                    <td>{{ $sparepart->category->name }}</td>
+                                    <td class="text-center">{{ $sparepart->stock }}</td>
                                     <td>
-                                        <a href="#"
-                                            class="btn btn-primary"><i class="fas fa-pen-to-square"></i></a>
+                                        <a href="{{ route('spareparts.edit', $sparepart->id) }}" class="btn btn-primary"><i class="fas fa-pen-to-square"></i></a>
                                     </td>
                                 </tr>
+                                @endforeach
                             </table>
                         </div>
                     </div>

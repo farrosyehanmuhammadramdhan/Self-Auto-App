@@ -42,7 +42,6 @@
                                             <label for="name">Nama</label>
                                             <input type="text" name="name" 
                                                 class="form-control @error('name') is-invalid @enderror" 
-                                                {{-- old() sebagai fallback, $customer->name sebagai nilai default --}}
                                                 value="{{ old('name', $customer->name) }}" required>
                                             @error('name')
                                                 <div class="invalid-feedback">

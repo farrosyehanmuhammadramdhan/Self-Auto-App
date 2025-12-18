@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->foreignId('service_master_id')->constrained('service_masters')->onDelete('cascade');
+            $table->decimal('price', 15, 2); // Harga jasa saat itu
             $table->timestamps();
+
             $table->index(['service_id', 'service_master_id']);
         });
     }

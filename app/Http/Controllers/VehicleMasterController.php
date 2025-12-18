@@ -87,7 +87,7 @@ class VehicleMasterController extends Controller
     public function edit(VehicleMaster $vehicleMaster)
     {
         // Ambil semua customer untuk Select2 (tanpa AJAX)
-        $customers = Customer::select('id', 'name')->orderBy('name')->get();
+        $customers = Customer::get();
 
         $wheelsOptions = [
             2 => '2 Roda (Motor)',

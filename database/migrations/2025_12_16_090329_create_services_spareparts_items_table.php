@@ -15,7 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_id')->constrained('services')->onDelete('cascade');
             $table->foreignId('sparepart_id')->constrained('spareparts')->onDelete('cascade');
+            $table->integer('quantity')->default(1);
+            $table->decimal('price', 15, 2); // Harga jual sparepart saat itu
+            $table->decimal('subtotal', 15, 2); // qty * price
             $table->timestamps();
+
             $table->index(['service_id', 'sparepart_id']);
         });
     }

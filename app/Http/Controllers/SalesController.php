@@ -10,7 +10,8 @@ use App\Models\SparePart;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\DB;
-use Illuminate\View\View; // Import untuk type-hinting View
+use Illuminate\View\View;
+ // Import untuk type-hinting View
 
 class SalesController extends Controller
 {
@@ -93,7 +94,7 @@ class SalesController extends Controller
             
             DB::commit();
 
-            return redirect()->route('sales.show', $sale->id)->with('success', 'Penjualan Berhasil Ditambahkan dan Stok Diperbarui!');
+            return redirect()->route('sales.index', $sale->id)->with('success', 'Penjualan Berhasil Ditambahkan dan Stok Diperbarui!');
 
         } catch (\Exception $e) {
             DB::rollBack();
@@ -117,4 +118,5 @@ class SalesController extends Controller
 
         return view('pages.sales.show', compact('sale', 'bengkelInfo'));
     }
+
 }

@@ -75,11 +75,12 @@ class SparepartsController extends Controller
     /**
      * Show the form for editing the specified resource. (edit)
      */
-    public function edit(Sparepart $sparepart) // Gunakan Route Model Binding
+    public function edit($id) // Gunakan Route Model Binding
     {
+        $sparepart = Sparepart::findOrFail($id);
         $categories = Category::all(); // Ambil semua kategori
         // Dengan Route Model Binding, $sparepart sudah berisi data yang dicari
-        return view('pages.spareparts.edit', compact('categories'));
+        return view('pages.spareparts.edit', compact('categories', 'sparepart'));
     }
 
     /**

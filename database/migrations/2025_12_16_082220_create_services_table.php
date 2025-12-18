@@ -15,9 +15,11 @@ return new class extends Migration
             $table->id();
             $table->foreignId('vehicle_master_id')->constrained('vehicle_masters')->onDelete('cascade');
             $table->foreignId('technician_id')->constrained('technicians')->onDelete('cascade');
-            $table->enum('type', ['service', 'maintenance', 'other'])->default('service');
+            $table->date('service_date');
+            $table->enum('type', ['service', 'maintenance', 'emergency', 'other'])->default('service');
             $table->enum('status', ['pending', 'in_progress', 'completed', 'cancelled'])->default('pending');
-            $table->decimal('total_price', 15, 2);
+            $table->decimal('total_price', 15, 2)->default(0);
+            $table->text('notes')->nullable();
             $table->timestamps();
         });
     }

@@ -3,18 +3,18 @@
 @section('title', 'Detail Penjualan')
 
 @push('style')
-{{-- Tidak ada CSS tambahan yang diperlukan jika Anda menggunakan template Stisla/A-UI standar --}}
 @endpush
 
 @section('main')
 <div class="main-content">
     <section class="section">
         <div class="section-header">
+            <div class="section-header-back">
+                <a href="{{ route('sales.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
+            </div>
             <h1>Detail Penjualan</h1>
             <div class="section-header-button">
-                {{-- Tombol Cetak dipindah ke bagian kanan, sesuai gambar --}}
                 <button class="btn btn-success btn-icon icon-left" onclick="window.print()"><i class="fas fa-print"></i> Cetak Invoice</button>
-                <a href="{{ route('sales.index') }}" class="btn btn-info icon-left"><i class="fas fa-arrow-left"></i> Kembali</a>
             </div>
             
         </div>
@@ -55,8 +55,9 @@
                                 {{ $customerName }}<br>
                                 {{-- Tampilkan informasi kontak pelanggan jika ada --}}
                                 @if($sale->customer)
-                                    Telepon: {{ $sale->customer->phone }}<br>
+                                    {{ $sale->customer->phone }}<br>
                                 @endif
+                                {{ $sale->customer->address ?? 'Alamat Pelanggan' }}
                             </address>
                         </div>
                     </div>

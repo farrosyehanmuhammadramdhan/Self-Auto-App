@@ -15,7 +15,7 @@
             <h1>Data Penjualan</h1>
             <div class="section-header-button">
                 <a href="{{ route('sales.create') }}" class="btn btn-primary">
-                    Tambah Penjualan
+                    <i class="fas fa-cart-plus"></i> Tambah Penjualan
                 </a>
             </div>
             <div class="section-header-breadcrumb">
@@ -47,7 +47,6 @@
                                             <th>Invoice</th>
                                             <th>Pelanggan</th>
                                             <th>Total</th>
-                                            <th>Alamat</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -57,13 +56,13 @@
                                             <td>
                                                 {{ $sale->invoice_number }}
                                                 <div class="table-links">
-                                                    <a href="#">Show</a>
+                                                    <a href="{{ route('sales.show', $sale->id) }}">Show</a>
                                                     <div class="bullet"></div>
                                                     <a href="#">Print</a>
                                                 </div>
                                             </td>
                                             <td>{{ $sale->customer->name }}</td>
-                                            <td>{{ $sale->total }}</td>
+                                            <td>{{ "Rp. " . number_format($sale->total, 0, ',', '.') }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>

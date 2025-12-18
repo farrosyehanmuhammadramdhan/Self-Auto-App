@@ -9,6 +9,7 @@ use App\Http\Controllers\SparepartsController;
 use App\Http\Controllers\TechniciansController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceMasterController;
 
 /*
@@ -30,6 +31,7 @@ Route::resource('technicians', TechniciansController::class);
 Route::resource('sales', SalesController::class);
 Route::resource('dashboard', DashboardController::class);
 Route::resource('services-masters', ServiceMasterController::class);
+Route::resource('services', ServiceController::class);
 
 
 Route::get('/login', function () {

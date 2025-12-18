@@ -36,7 +36,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="invoice_number">Nomor Invoice <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control @error('invoice_number') is-invalid @enderror" id="invoice_number" name="invoice_number" value="{{ old('invoice_number', 'INV-' . time()) }}" required>
+                                            <input type="text" class="form-control @error('invoice_number') is-invalid @enderror" id="invoice_number" name="invoice_number" value="{{ old('invoice_number', 'INV-' . date('Ymd') . '-' . rand(1000, 9999)) }}" required>
                                             @error('invoice_number')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror
@@ -68,7 +68,7 @@
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="date">Tanggal <span class="text-danger">*</span></label>
-                                            <input type="date" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date', now()->format('Y-m-d H:i:s')) }}" required>
+                                            <input type="datetime" class="form-control @error('date') is-invalid @enderror" id="date" name="date" value="{{ old('date', now()->format('Y-m-d H:i:s')) }}" required>
                                             @error('date')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                             @enderror

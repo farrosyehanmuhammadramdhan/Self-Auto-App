@@ -13,7 +13,7 @@ class DashboardController extends Controller
     {
         $customers = Customer::count();
         $vehicles = VehicleMaster::count();
-        $spareparts = SparePart::query()->where('stock', '>', 0)->get();
+        $spareparts = Sparepart::where('stock', '=', 0)->get();
         return view('pages.dashboard.index', compact('customers', 'vehicles', 'spareparts'));
     }
 }

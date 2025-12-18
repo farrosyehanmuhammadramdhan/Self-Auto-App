@@ -8,20 +8,21 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model
 {
-    use HasFactory;
-    
-    protected $fillable = [
-        'vehicle_master_id',
-        'technician_id',
-    ];
+    protected $fillable = ['vehicle_master_id', 'technician_id', 'type', 'status', 'total_price', 'note'];
 
-    public function vehicleMaster() : BelongsTo
-    {
+    public function vehicle() {
         return $this->belongsTo(VehicleMaster::class, 'vehicle_master_id');
     }
 
-    public function technician() : BelongsTo
-    {
+    public function technician() {
         return $this->belongsTo(Technician::class, 'technician_id');
+    }
+
+    public function items() {
+        return $this->hasMany(ServiceItem::class);
+    }
+
+    public function spareparts() {
+        return $this->hasMany(ServiceSparepartItem::class);
     }
 }

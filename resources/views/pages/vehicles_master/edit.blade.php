@@ -14,7 +14,7 @@
             <div class="section-header-back">
                 <a href="{{ route('vehicle-masters.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Tambah Master Kendaraan</h1>
+            <h1>Edit Master Kendaraan</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Kendaraan</a></div>
                 <div class="breadcrumb-item"><a href="{{ route('vehicle-masters.index') }}">Kendaraan Master</a></div>
@@ -34,7 +34,7 @@
                             <h4>Form Edit Master Kendaraan</h4>
                         </div>
 
-                        <form action="{{ route('vehicle-masters.store') }}" method="POST">
+                        <form action="{{ route('vehicle-masters.update', $vehicleMaster->id) }}" class="needs-validation" novalidate="" autocomplete="off') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">
@@ -46,17 +46,14 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nama Pelanggan<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <select name="customer_id" class="form-control select2 @error('customer_id') is-invalid @enderror" required>
+                                                <select name="customer_id" class="form-control select2" required>
                                                     <option value="">Pilih Pelanggan</option>
                                                     @foreach ($customers as $customer)
-                                                    <option value="{{ $customer->id }}" {{ old('customer_id') == $customer->id ? 'selected' : '' }}>
+                                                    <option value="{{ $customer->id }}" {{ $customer->id == $vehicleMaster->customer_id ? 'selected' : '' }} data-id="{{($customer->id) }}">
                                                         {{ $customer->name }}
                                                     </option>
                                                     @endforeach
                                                 </select>
-                                                @error('customer_id')
-                                                <div class="invalid-feedback">{{ $message }}</div>
-                                                @enderror
                                             </div>
                                         </div>
 
@@ -64,7 +61,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Merk<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="brand" required value="{{ old('brand') }}" class="form-control @error('brand') is-invalid @enderror">
+                                                <input type="text" name="brand" required value="{{ old('brand', $vehicleMaster->brand) }}" class="form-control @error('brand') is-invalid @enderror">
                                                 @error('brand')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -75,7 +72,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Model<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="model" required value="{{ old('model') }}" class="form-control @error('model') is-invalid @enderror">
+                                                <input type="text" name="model" required value="{{ old('model', $vehicleMaster->model ) }}" class="form-control @error('model') is-invalid @enderror">
                                                 @error('model')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -86,7 +83,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Tipe Kendaraan<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="type" required value="{{ old('type') }}" class="form-control @error('type') is-invalid @enderror">
+                                                <input type="text" name="type" required value="{{ old('type', $vehicleMaster->type) }}" class="form-control @error('type') is-invalid @enderror">
                                                 @error('type')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -97,7 +94,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Tahun<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="number" name="model_year" required value="{{ old('model_year') }}" class="form-control @error('model_year') is-invalid @enderror">
+                                                <input type="number" name="model_year" required value="{{ old('model_year', $vehicleMaster->model_year) }}" class="form-control @error('model_year') is-invalid @enderror">
                                                 @error('model_year')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -111,7 +108,7 @@
                                                 <select class="form-control selectric @error('wheels') is-invalid @enderror" required name="wheels">
                                                     <option value="">Pilih Jumlah Roda</option>
                                                     @foreach ($wheelsOptions as $value => $label)
-                                                    <option value="{{ $value }}" {{ old('wheels') == $value ? 'selected' : '' }}>
+                                                    <option value="{{ $value }}" {{ $value == $vehicleMaster->wheels ? 'selected' : '' }}>
                                                         {{ $label }}
                                                     </option>
                                                     @endforeach
@@ -126,7 +123,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nomor Plat<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="license_plate" required value="{{ old('license_plate') }}" class="form-control @error('license_plate') is-invalid @enderror">
+                                                <input type="text" name="license_plate" required value="{{ old('license_plate', $vehicleMaster->license_plate) }}" class="form-control @error('license_plate') is-invalid @enderror">
                                                 @error('license_plate')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -137,7 +134,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Warna Kendaraan<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="color" required value="{{ old('color') }}" class="form-control @error('color') is-invalid @enderror">
+                                                <input type="text" name="color" required value="{{ old('color', $vehicleMaster->color) }}" class="form-control @error('color') is-invalid @enderror">
                                                 @error('color')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -154,7 +151,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nomor Rangka (VIN)<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="vin" required value="{{ old('vin') }}" class="form-control @error('vin') is-invalid @enderror">
+                                                <input type="text" name="vin" required value="{{ old('vin', $vehicleMaster->vin) }}" class="form-control @error('vin') is-invalid @enderror">
                                                 @error('vin')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -165,7 +162,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Nomor Mesin<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="text" name="engine_number" value="{{ old('engine_number') }}" class="form-control @error('engine_number') is-invalid @enderror">
+                                                <input type="text" name="engine_number" value="{{ old('engine_number', $vehicleMaster->engine_number) }}" class="form-control @error('engine_number') is-invalid @enderror">
                                                 @error('engine_number')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -176,7 +173,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Tahun Pembelian<span class="text-danger">*</span></label>
                                             <div class="col-sm-12 col-md-7">
-                                                <input type="number" name="purchase_year" required value="{{ old('purchase_year') }}" class="form-control @error('purchase_year') is-invalid @enderror">
+                                                <input type="number" name="purchase_year" required value="{{ old('purchase_year', $vehicleMaster->purchase_year) }}" class="form-control @error('purchase_year') is-invalid @enderror">
                                                 @error('purchase_year')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror
@@ -187,7 +184,7 @@
                                         <div class="form-group row mb-4">
                                             <label class="col-form-label text-md-left col-12 col-md-3 col-lg-3">Catatan (Opsional)</label>
                                             <div class="col-sm-12 col-md-7">
-                                                <textarea name="note" class="form-control @error('note') is-invalid @enderror" style="height: 100px">{{ old('note') }}</textarea>
+                                                <textarea name="note" class="form-control @error('note') is-invalid @enderror" value="{{ old('note',$vehicleMaster->note) }}" style="height: 100px">{{ old('note') }}</textarea>
                                                 @error('note')
                                                 <div class="invalid-feedback">{{ $message }}</div>
                                                 @enderror

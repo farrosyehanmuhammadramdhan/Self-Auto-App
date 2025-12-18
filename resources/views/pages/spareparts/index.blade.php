@@ -65,7 +65,7 @@
                                             <td>
                                                 {{ $sparepart->name }}
                                                 <div class="table-links">
-                                                    <a href="#">Edit</a>
+                                                    <a href="{{ route('spareparts.edit', $sparepart->id) }}">Edit</a>
                                                     <div class="bullet"></div>
                                                     <a href="#"
                                                         class="text-danger">Trash</a>
@@ -73,7 +73,11 @@
                                             </td>
                                             <td>{{ $sparepart->code }}</td>
                                             <td>{{ $sparepart->category->name }}</td>
-                                            <td>{{ $sparepart->stock }}</td>
+                                            <td class="text-left">
+                                                <span class="badge {{ $sparepart->stock >= 6 ? 'bg-success text-white' : ($sparepart->stock >= 1 ? 'bg-warning text-white' : 'bg-danger text-white') }}">
+                                                    {{ $sparepart->stock == 0 ? 'Habis' : $sparepart->stock }}
+                                                </span>
+                                            </td>
                                             <td>{{ "Rp. " . number_format($sparepart->price_buy, 0, ',', '.') }}</td>
                                             <td>{{ "Rp. " . number_format($sparepart->price_sell, 0, ',', '.') }}</td>
                                         </tr>

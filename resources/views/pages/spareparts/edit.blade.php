@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Spareparts')
+@section('title', 'Edit Spareparts')
 
 @push('style')
 <link rel="stylesheet"
@@ -21,11 +21,11 @@
                 <a href="{{ route('spareparts.index') }}"
                     class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Tambah Sparepart</h1>
+            <h1>Edit Sparepart</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Spareparts</a></div>
                 <div class="breadcrumb-item"><a href="#">Data Spareparts</a></div>
-                <div class="breadcrumb-item">Tambah Sparepart Baru</div>
+                <div class="breadcrumb-item">Edit Sparepart Baru</div>
             </div>
         </div>
 
@@ -37,20 +37,20 @@
                             <h2 class="section-title">Tambah Sparepart</h2>
                             <p class="section-lead">Tambah data sparepart baru</p>
 
-                            <form action="{{ route('spareparts.update', $sparepart) }}" method="POST">
+                            <form action="{{ route('spareparts.update', $sparepart->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="code">Kode Sparepart <span class="text-danger">*</span></label>
-                                            <input type="text" name="code" id="code"
+                                            <input type="text" name="code" id="code" value="{{old('code', $sparepart->code)}}"
                                                 class="form-control" placeholder="Kode Sparepart" required>
                                         </div>
 
                                         <div class="form-group">
                                             <label for="name">Nama Sparepart <span class="text-danger">*</span></label>
-                                            <input type="text" name="name" id="name"
+                                            <input type="text" name="name" id="name" value="{{old('name', $sparepart->name)}}"
                                                 class="form-control" placeholder="Nama Sparepart" required>
                                         </div>
 
@@ -58,9 +58,9 @@
                                             <label for="category_id">Kategori <span class="text-danger">*</span></label>
                                             <select name="category_id" class="form-control selectric" required>
                                                 <option value="" selected>Pilih Kategori</option>
-                                                    @foreach ($categories as $category)
-                                                        <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                                    @endforeach
+                                                @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}" {{ $sparepart->category_id == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
@@ -72,8 +72,8 @@
                                                 <div class="input-group-prepend">
                                                     <div class="input-group-text">Rp</div>
                                                 </div>
-                                                <input type="text" name="price_buy" id="price_buy"
-                                                    class="form-control currency" value="0" required>
+                                                <input type="text" name="price_buy" id="price_buy" value="{{old('price_buy', $sparepart->price_buy)}}"
+                                                    class="form-control currency" required>
                                             </div>
                                         </div>
 
@@ -84,7 +84,7 @@
                                                     <div class="input-group-text">Rp</div>
                                                 </div>
                                                 <input type="text" name="price_sell" id="price_sell"
-                                                    class="form-control currency" value="0" required>
+                                                    class="form-control currency" value="{{old('price_sell', $sparepart->price_sell)}}" required>
                                             </div>
                                         </div>
                                     </div>
