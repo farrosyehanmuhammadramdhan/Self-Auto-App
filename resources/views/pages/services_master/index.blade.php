@@ -43,6 +43,7 @@
                                             <th>No</th>
                                             <th>Nama Layanan</th>
                                             <th>Harga</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,6 +54,12 @@
                                                 {{ $servicemaster->service_name }}
                                             </td>
                                             <td>{{ "Rp. " . number_format($servicemaster->service_price, 0, ',', '.')}}</td>
+                                            <td>
+                                                <a href="{{ route('services-masters.edit', $servicemaster->id) }}"
+                                                    class="btn btn-info">
+                                                    <i class="fas fa-edit"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>

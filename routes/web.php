@@ -11,6 +11,7 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceMasterController;
+use App\Http\Controllers\StockController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,7 @@ Route::resource('sales', SalesController::class);
 Route::resource('dashboard', DashboardController::class);
 Route::resource('services-masters', ServiceMasterController::class);
 Route::resource('services', ServiceController::class);
+Route::resource('stock', StockController::class);
 
 
 Route::get('/login', function () {

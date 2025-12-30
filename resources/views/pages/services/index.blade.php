@@ -42,7 +42,7 @@
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table-striped table">
+                                <table class="table-striped table table-bordered" id="service-table">
                                     <thead>
                                         <tr>
                                             <th>No</th>
@@ -56,9 +56,28 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                    <tr></tr>
+                                        @foreach ($services as $key => $service)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $service->service_date }}</td>
+                                            <td>{{ $service->type }}</td>
+                                            <td>{{ $service->vehicle->license_plate }}</td>
+                                            <td>{{ $service->vehicle->customer->name }}</td>
+                                            <td>{{ $service->technician->name }}</td>
+                                            <td>{{ "Rp. " . number_format($service->total_price, 0, ',', '.') }}</td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="#" class="btn btn-info mr-1">
+                                                        <i class="fas fa-eye"></i>
+                                                    </a>
+                                                    <a href="#" class="btn btn-warning">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                     </tbody>
-
                                 </table>
                             </div>
                         </div>
@@ -78,4 +97,32 @@
 <script src="{{ asset('js/page/features-posts.js') }}"></script>
 <script src="https://cdn.datatables.net/2.3.5/js/dataTables.js"></script>
 
+<script>
+    $(document).ready(function() {
+        // Inisialisasi DataTables
+        $('#service-table').DataTable({
+            // Konfigurasi Paging dan Length Menu
+            paging: true,
+            lengthMenu: [
+                [10, 25, 50, -1],
+                [10, 25, 50, "Semua"]
+            ],
+
+            // Terjemahan Bahasa Indonesia
+            language: {
+                lengthMenu: "Tampilkan _MENU_ entri",
+                zeroRecords: "Tidak ada data pelanggan yang ditemukan.",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ entri",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 entri",
+                infoFiltered: "(disaring dari total _MAX_ entri)",
+                search: "Cari",
+
+            },
+            // Urutan default (opsional)
+            order: [
+                [0, 'asc']
+            ],
+        });
+    });
+</script>
 @endpush

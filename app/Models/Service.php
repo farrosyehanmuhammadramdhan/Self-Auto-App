@@ -8,7 +8,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Service extends Model
 {
-    protected $fillable = ['vehicle_master_id', 'technician_id', 'type', 'status', 'total_price', 'note'];
+    protected $fillable = [
+        'vehicle_master_id', 
+        'technician_id',
+        'service_date', 
+        'type', 
+        'status', 
+        'total_price', 
+        'notes',
+    ];
 
     public function vehicle() {
         return $this->belongsTo(VehicleMaster::class, 'vehicle_master_id');

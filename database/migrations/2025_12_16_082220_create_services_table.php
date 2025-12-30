@@ -16,8 +16,8 @@ return new class extends Migration
             $table->foreignId('vehicle_master_id')->constrained('vehicle_masters')->onDelete('cascade');
             $table->foreignId('technician_id')->constrained('technicians')->onDelete('cascade');
             $table->date('service_date');
-            $table->enum('type', ['service', 'maintenance', 'emergency', 'other'])->default('service');
-            $table->enum('status', ['pending', 'in_progress', 'completed', 'cancelled'])->default('pending');
+            $table->enum('type', ['Servis Berkala', 'Perbaikan', 'Darurat', 'Lainnya'])->default('Servis Berkala');
+            $table->enum('status', ['Pending', 'Sedang_dikerjakan', 'Selesai', 'Dibatalkan'])->default('Pending');
             $table->decimal('total_price', 15, 2)->default(0);
             $table->text('notes')->nullable();
             $table->timestamps();

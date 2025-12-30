@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Layanan Master')
+@section('title', 'Edit Layanan Master')
 
 @section('main')
 <div class="main-content">
@@ -9,15 +9,15 @@
             <div class="section-header-back">
                 <a href="{{ route('services-masters.index') }}" class="btn btn-icon"><i class="fas fa-arrow-left"></i></a>
             </div>
-            <h1>Tambah Layanan</h1>
+            <h1>Edit Layanan</h1>
             <div class="section-header-breadcrumb">
                 <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                <div class="breadcrumb-item">Tambah Layanan Baru</div>
+                <div class="breadcrumb-item">Edit Layanan Baru</div>
             </div>
         </div>
 
         <div class="section-body">
-            <h2 class="section-title">Buat Layanan Baru</h2>
+            <h2 class="section-title">Edit Layanan Baru</h2>
             <p class="section-lead">
                 Isi Form Ini Untuk Menambahkan Data Pelanggan.
             </p>
@@ -29,8 +29,9 @@
                         </div>
 
                         {{-- PERBAIKAN: Mengganti action ke route yang benar --}}
-                        <form action="{{ route('services-masters.store') }}" method="POST">
+                        <form action="{{ route('services-masters.update', $servicemaster->id) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="card-body">
                                 <div class="row">
                                     {{-- Kolom Kiri (Nama Layanan) --}}
@@ -39,7 +40,7 @@
                                             <label for="service_name">Nama Layanan <span class="text-danger">*</span></label>
                                             <input type="text" name="service_name" id="service_name"
                                                 class="form-control @error('service_name') is-invalid @enderror"
-                                                value="{{ old('service_name') }}" required>
+                                                value="{{ old('service_name', $servicemaster->service_name) }}" required>
                                             @error('name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -57,7 +58,7 @@
                                                     <div class="input-group-text">Rp</div>
                                                 </div>
                                                 <input type="text" name="service_price" id="service_price"
-                                                    class="form-control currency" value="0" required>
+                                                    class="form-control currency" value="{{ old('service_price', $servicemaster->service_price) }}" required>
                                             </div>
                                         </div>
                                     </div>

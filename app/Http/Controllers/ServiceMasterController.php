@@ -30,4 +30,21 @@ class ServiceMasterController extends Controller
 
         return redirect()->route('services-masters.index')->with('success', 'Service Master created successfully.');
     }
+
+    public function edit($id)
+    {
+        $servicemaster = ServiceMaster::findOrFail($id);
+        return view('pages.services_master.edit', compact('servicemaster'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $servicemaster = ServiceMaster::findOrFail($id);
+        $servicemaster->update([
+            'service_name' => $request->service_name,
+            'service_price' => $request->service_price,
+        ]);
+
+        return redirect()->route('services-masters.index')->with('success', 'Service Master updated successfully.');
+    }
 }

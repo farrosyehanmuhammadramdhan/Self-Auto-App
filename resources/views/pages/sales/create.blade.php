@@ -32,7 +32,7 @@
                             </div>
                             <div class="card-body">
                                 <div class="row">
-                                    {{-- Kolom Kiri: Pelanggan dan Invoice --}}
+                                    {{-- Kolom Kiri: Invoice --}}
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <label for="invoice_number">Nomor Invoice <span class="text-danger">*</span></label>
@@ -101,7 +101,7 @@
                                             <tr>
                                                 <td>
                                                     <select class="form-control item-sparepart select2-item" name="items[{{ $index }}][sparepart_id]" required data-index="{{ $index }}">
-                                                        <option value="" selected disabled>-- Pilih Sparepart --</option>
+                                                        <option value="" selected>-- Pilih Sparepart --</option>
                                                         @foreach ($spareparts as $sparepart)
                                                         <option
                                                             value="{{ $sparepart->id }}"

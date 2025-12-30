@@ -17,8 +17,9 @@
             <h1>Tambah Service Baru</h1>
         </div>
 
-        <form action="{{ route('services.store') }}" method="POST">
+        <form action="#" method="POST">
             @csrf
+            @method('PUT')
             <div class="card">
                 <div class="card-body">
                     {{-- BARIS 1: Kendaraan (Select2) & Jenis Service (Selectric) --}}
@@ -29,7 +30,9 @@
                                 <select name="vehicle_master_id" class="form-control select2" required>
                                     <option value="" selected>-- Pilih Kendaraan --</option>
                                     @foreach($vehicles as $vehicle)
-                                    <option value="{{ $vehicle->id }}">{{ $vehicle->license_plate }} - {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->model_year }}) (Pemilik : {{ $vehicle->customer->name }})</option>
+                                    <option value="{{ $vehicle->id }}" {{ $vehicle->id == $service->vehicle_master_id ? 'selected' : '' }} data-id="{{ $vehicle->id }}">
+                                        {{ $vehicle->license_plate }} - {{ $vehicle->brand }} {{ $vehicle->model }} ({{ $vehicle->model_year }}) (Pemilik : {{ $vehicle->customer->name }})
+                                    </option>
                                     @endforeach
                                 </select>
                             </div>
@@ -52,11 +55,11 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label>Teknisi *</label>
-                                <select name="technician_id" class="form-control select2" required>
-                                    <option value="">-- Pilih Teknisi --</option>
-                                    @foreach($technicians as $t)
-                                    <option value="{{ $t->id }}">{{ $t->name }}</option>
+                                <label>Jenis Service *</label>
+                                <select name="type" class="form-control selectric" required>
+                                    <option value="">Pilih Jenis Service</option>
+                                    @foreach (['Servis Berkala', 'Perbaikan', 'Darurat', 'Lainnya'] as $type)
+                                    <option value="{{ $type }}" {{ (session('type') ?? old('type')) == $type ? 'selected' : '' }}>{{ $type }}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -72,15 +75,26 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group">
-                                <label for="address">Keluhan</label>
+                                <label for="notes">Keluhan</label>
                                 <textarea class="form-control @error('notes') is-invalid @enderror"
                                     name="notes"
-                                    data-height="150">{{ old('notes') }}</textarea>
+                                    data-height="150">{{ old('notes', $service->notes) }}</textarea>
                                 @error('address')
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
                                 @enderror
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="type">Status</label>
+                                <select name="" id="">
+                                    <option value="">Pending</option>
+                                    <option value="">Sedang Dikerjakan</option>
+                                    <option value="">Selesai</option>
+                                    <option value="">Batal</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -102,7 +116,7 @@
                                     <select name="service_items[0][service_master_id]" class="form-control select2 select2-item select-service-master" required>
                                         <option value="" selected>-- Pilih Jasa --</option>
                                         @foreach($service_masters as $servicemaster)
-                                        <option value="{{ $servicemaster->id }}" data-price="{{ $servicemaster->service_price }}">{{ $servicemaster->service_name }}</option>
+                                        <option value="{{ $servicemaster->id }}" {{ $servicemaster->id == $service->service_master_id ? 'selected' : '' }} data-price="{{ $servicemaster->service_price }}">{{ $servicemaster->service_name }}</option>
                                         @endforeach
                                     </select>
                                 </td>
@@ -181,7 +195,7 @@
                 <select name="service_items[${serviceIdx}][service_master_id]" class="form-control select2 select2-item select-service-master" required>
                     <option value="">-- Pilih Jasa --</option>
                     @foreach($service_masters as $servicemaster)
-                        <option value="{{ $servicemaster->id }}" data-price="{{ $servicemaster->service_price }}">{{ $servicemaster->service_name }}</option>
+                        <option value="{{ $servicemaster->id }}" {{ $servicemaster->id == $service->service_master_id ? 'selected' : '' }} data-price="{{ $servicemaster->service_price }}">{{ $servicemaster->service_name }}</option>
                     @endforeach
                 </select>
             </td>
@@ -202,7 +216,7 @@
                 <select name="sparepart_items[${sparepartIdx}][sparepart_id]" class="form-control select2-item select-sp" required>
                     <option value="">-- Pilih Sparepart --</option>
                     @foreach($spareparts as $sp)
-                        <option value="{{ $sp->id }}" data-price="{{ $sp->price_sell }}">{{ $sp->name }} (Stok: {{ $sp->stock }})</option>
+                        <option value="{{ $sp->id }}" {{ $sp->id == $service->sparepart_id ? 'selected' : '' }} data-price="{{ $sp->price_sell }}">{{ $sp->name }} (Stok: {{ $sp->stock }})</option>
                     @endforeach
                 </select>
             </td>
