@@ -57,7 +57,7 @@
                         </a>
                     </li>
                     <li class="{{ Request::is('dashboard-ecommerce-dashboard') ? 'active' : '' }}">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{{ route('stock.index') }}">
                             <i class="fa-solid fa-boxes-stacked"></i><span>Stok Spareparts</span>
                         </a>
                     </li>

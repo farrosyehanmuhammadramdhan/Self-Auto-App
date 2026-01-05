@@ -70,7 +70,7 @@
                                                     <a href="#" class="btn btn-info mr-1">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
-                                                    <a href="#" class="btn btn-warning">
+                                                    <a href="{{ route('services.edit', $service->id) }}" class="btn btn-warning">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
                                                 </div>

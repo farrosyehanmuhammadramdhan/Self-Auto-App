@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('stocks', function (Blueprint $table) {
             $table->foreignId('sparepart_id')->constrained('spareparts')->onDelete('cascade');
             $table->integer('quantity'); // Jumlah stok yang masuk/keluar
+            $table->enum('type', ['Masuk', 'Keluar']);
             $table->text('description')->nullable(); // Keterangan transaksi
             $table->timestamps();
 

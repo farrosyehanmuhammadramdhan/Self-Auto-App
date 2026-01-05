@@ -33,20 +33,7 @@ class ServiceController extends Controller
     public function store(Request $request): RedirectResponse
     {
         // 1. Validasi diperketat untuk menghindari data null pada sparepart
-        // $request->validate([
-        //     'vehicle_master_id' => 'required|exists:vehicle_masters,id',
-        //     'technician_id'     => 'required|exists:technicians,id',
-        //     'type'              => 'required|string',
-        //     'grand_total_submit' => 'required|numeric',
-        //     'service_items'     => 'required|array|min:1',
-        //     'service_items.*.service_master_id' => 'required|exists:service_masters,id',
-        //     'service_items.*.price'             => 'required|numeric',
-        //     // Validasi sparepart jika ada
-        //     'sparepart_items'   => 'nullable|array',
-        //     'sparepart_items.*.sparepart_id'    => 'required_with:sparepart_items|exists:spareparts,id',
-        //     'sparepart_items.*.quantity'        => 'required_with:sparepart_items|integer|min:1',
-        //     'sparepart_items.*.price'           => 'required_with:sparepart_items|numeric',
-        // ]);
+
 
         try {
             DB::beginTransaction();
@@ -80,8 +67,8 @@ class ServiceController extends Controller
                         'price'        => $sp['price']
                     ]);
 
-            // //         // Logika potong stok (Opsional: Pastikan field 'stock' ada di tabel spareparts)
-            // //         // Sparepart::find($sp['sparepart_id'])->decrement('stock', $sp['quantity']);
+                    // //         // Logika potong stok (Opsional: Pastikan field 'stock' ada di tabel spareparts)
+                    // //         // Sparepart::find($sp['sparepart_id'])->decrement('stock', $sp['quantity']);
                 }
             }
 
@@ -103,25 +90,98 @@ class ServiceController extends Controller
 
     public function edit($id)
     {
-        $service = Service::findOrFail($id);
-        $vehicles = VehicleMaster::all();
+        // Ambil data service beserta relasi item-nya
+        $service = Service::with(['items', 'spareparts'])->findOrFail($id);
+
+        // Ambil data master untuk dropdown
+        $vehicles = VehicleMaster::with('customer')->get();
         $technicians = Technician::all();
-        return view('pages.services.edit', compact('service', 'vehicles', 'technicians'));
+        $service_masters = ServiceMaster::all();
+        $spareparts = Sparepart::where('stock', '>', 0)->get(); // Atau ambil semua jika ingin menampilkan history
+
+        return view('pages.services.edit', compact('service', 'vehicles', 'technicians', 'service_masters', 'spareparts'));
     }
 
     public function update(Request $request, $id)
     {
-        $service = Service::findOrFail($id);
-        $service->update([
-            'vehicle_master_id' => $request->vehicle_master_id,
-            'technician_id'     => $request->technician_id,
-            'service_date'      => $request->service_date,
-            'type'              => $request->type,
-            'status'            => $request->status,
-            'total_price'       => $request->total_price,
-            'notes'             => $request->notes
+        // 1. Validasi
+        $request->validate([
+            'vehicle_master_id' => 'required|exists:vehicle_masters,id',
+            'technician_id'     => 'required|exists:technicians,id',
+            'service_date'      => 'required|date',
+            'type'              => 'required|in:Servis Berkala,Perbaikan,Darurat,Lainnya',
+            'status'            => 'required|in:Pending,Sedang_dikerjakan,Selesai,Dibatalkan',
+            'notes'             => 'nullable|string',
+
+            // Validasi Array Service Items
+            'service_items'     => 'required|array',
+            'service_items.*.service_master_id' => 'required|exists:service_masters,id',
+            'service_items.*.price'             => 'required|numeric|min:0',
+
+            // Validasi Array Sparepart Items (Nullable/Optional)
+            'sparepart_items'   => 'nullable|array',
+            'sparepart_items.*.sparepart_id' => 'required|exists:spareparts,id',
+            'sparepart_items.*.quantity'     => 'required|integer|min:1',
+            'sparepart_items.*.price'        => 'required|numeric|min:0',
         ]);
 
-        return redirect()->route('services.index')->with('success', 'Data service berhasil diperbarui!');
+        try {
+            DB::transaction(function () use ($request, $id) {
+                $service = Service::findOrFail($id);
+                $totalPrice = 0;
+
+                // 2. Update Data Utama
+                $service->update([
+                    'vehicle_master_id' => $request->vehicle_master_id,
+                    'technician_id'     => $request->technician_id,
+                    'service_date'      => $request->service_date,
+                    'type'              => $request->type,
+                    'status'            => $request->status, // Field baru di edit
+                    'notes'             => $request->notes,
+                ]);
+
+                // 3. Proses Service Items (Jasa)
+                // Hapus data lama
+                $service->serviceItems()->delete();
+
+                // Simpan data baru dari form
+                if ($request->has('service_items')) {
+                    foreach ($request->service_items as $item) {
+                        $service->serviceItems()->create([
+                            'service_master_id' => $item['service_master_id'],
+                            'price'             => $item['price'],
+                        ]);
+                        $totalPrice += $item['price'];
+                    }
+                }
+
+                // 4. Proses Sparepart Items
+                // Hapus data lama
+                // Catatan: Jika ada logika stok, kembalikan stok lama dulu di sini sebelum delete
+                $service->sparepartItems()->delete();
+
+                if ($request->has('sparepart_items')) {
+                    foreach ($request->sparepart_items as $item) {
+                        $subtotal = $item['quantity'] * $item['price'];
+                        $service->sparepartItems()->create([
+                            'sparepart_id' => $item['sparepart_id'],
+                            'quantity'     => $item['quantity'],
+                            'price'        => $item['price'],
+                            'subtotal'     => $subtotal,
+                        ]);
+                        $totalPrice += $subtotal;
+
+                        // Catatan: Kurangi stok baru di sini jika diperlukan
+                    }
+                }
+
+                // 5. Update Total Price di table parent
+                $service->update(['total_price' => $totalPrice]);
+            });
+
+            return redirect()->route('services.index')->with('success', 'Data Service berhasil diperbarui.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage())->withInput();
+        }
     }
 }

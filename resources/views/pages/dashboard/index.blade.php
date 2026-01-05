@@ -153,7 +153,7 @@
                                     <td>Rp.1.200.000</td>
                                     <td>
                                         <a href="#"
-                                            class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                            class="btn btn-info"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
                             </table>
