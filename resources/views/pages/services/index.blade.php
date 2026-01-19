@@ -67,7 +67,7 @@
                                             <td>{{ "Rp. " . number_format($service->total_price, 0, ',', '.') }}</td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="#" class="btn btn-info mr-1">
+                                                    <a href="{{ route('services.show', $service->id) }}" class="btn btn-info mr-1">
                                                         <i class="fas fa-eye"></i>
                                                     </a>
                                                     <a href="{{ route('services.edit', $service->id) }}" class="btn btn-warning">

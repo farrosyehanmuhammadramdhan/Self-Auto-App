@@ -31,6 +31,9 @@
                         <div class="card-body">
                             {{ $customers }}
                         </div>
+                        <div class="mt-2 mb-3 ml-4">
+                            <a href="{{ route('customers.index') }}" class="btn btn-primary btn-sm">Lihat Detail</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -46,6 +49,9 @@
                         </div>
                         <div class="card-body">
                             {{ $vehicles }}
+                        </div>
+                        <div class="mt-2 mb-3 ml-4">
+                            <a href="{{ route('vehicle-masters.index') }}" class="btn btn-primary btn-sm">Lihat Detail</a>
                         </div>
                     </div>
                 </div>
@@ -65,6 +71,9 @@
                         <div class="card-body">
                             35
                         </div>
+                        <div class="mt-2 mb-3 ml-4">
+                            <a href="{{ route('services.index') }}" class="btn btn-primary btn-sm">Lihat Detail</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -81,6 +90,9 @@
                         <div class="card-body">
                             Rp.187.000
                         </div>
+                        <div class="mt-2 mb-3 ml-4">
+                            <a href="#" class="btn btn-primary btn-sm">Lihat Detail</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -92,7 +104,7 @@
                     <div class="card-header">
                         <h4>Stok Spareparts Menipis</h4>
                         <div class="card-header-action">
-                            <a href="{{ route('spareparts.index') }}" class="btn btn-danger">
+                            <a href="{{ route('spareparts.index') }}" class="btn btn-info">
                                 Kelola Spareparts
                                 <i class="fas fa-chevron-right"></i>
                             </a>
@@ -130,7 +142,7 @@
                     <div class="card-header">
                         <h4>Service Terbaru</h4>
                         <div class="card-header-action">
-                            <a href="#" class="btn btn-danger">
+                            <a href="{{ route('services.index') }}" class="btn btn-info">
                                 Kelola Service
                                 <i class="fas fa-chevron-right"></i>
                             </a>

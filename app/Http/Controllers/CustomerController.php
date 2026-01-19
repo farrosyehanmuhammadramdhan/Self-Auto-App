@@ -59,11 +59,13 @@ class CustomerController extends Controller
     /**
      * Menampilkan pelanggan tertentu (opsional, tergantung kebutuhan).
      */
-    public function show(Customer $customer): View
-    {
-        // Route Model Binding sudah otomatis menemukan Customer, tidak perlu pengecekan
-        return view('pages.customers.show', compact('customer'));
-    }
+    public function show($id)
+{
+    // Mengambil customer beserta data kendaraan dan service-nya sekaligus
+    $customer = Customer::with(['vehicles', 'vehicles.services'])->findOrFail($id);
+    
+    return view('pages.customers.show', compact('customer'));
+}
 
     /**
      * Menampilkan formulir untuk mengedit pelanggan tertentu.

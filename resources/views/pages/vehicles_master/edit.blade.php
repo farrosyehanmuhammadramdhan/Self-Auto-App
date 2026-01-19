@@ -49,7 +49,9 @@
                                                 <select name="customer_id" class="form-control select2" required>
                                                     <option value="">Pilih Pelanggan</option>
                                                     @foreach ($customers as $customer)
-                                                    <option value="{{ $customer->id }}" {{ $customer->id == $vehicleMaster->customer_id ? 'selected' : '' }} data-id="{{($customer->id) }}">
+                                                    <option value="{{ $customer->id }}" 
+                                                    {{ $customer->id == $vehicleMaster->customer_id ? 'selected' : '' }} 
+                                                    data-id="{{($customer->id) }}">
                                                         {{ $customer->name }}
                                                     </option>
                                                     @endforeach

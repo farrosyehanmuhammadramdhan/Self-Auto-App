@@ -37,6 +37,15 @@ class VehicleMaster extends Model
         // Pastikan nama Model Customer sudah benar (asumsi App\Models\Customer)
         return $this->belongsTo(Customer::class);
     }
+
+    /**
+     * Relasi ke Service.
+     */
+    public function services()
+    {
+        // Pastikan nama Model Service sudah benar (asumsi App\Models\Service)
+        return $this->hasMany(Service::class);
+    }
     
     /**
      * Casting atribut untuk tipe data. Opsional, tapi bisa membantu.
