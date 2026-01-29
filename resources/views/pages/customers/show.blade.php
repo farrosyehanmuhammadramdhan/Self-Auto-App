@@ -85,7 +85,7 @@
                                             <td>{{ $vehicle->model }}</td>
                                             <td>{{ $vehicle->model_year }}</td>
                                             <td class="text-center">
-                                                <a href="#" class="btn btn-info btn-sm" title="Detail"><i class="fas fa-eye"></i></a>
+                                                <a href="{{ route('vehicle-masters.show', $vehicle->id) }}" class="btn btn-info btn-sm" title="Detail"><i class="fas fa-eye"></i></a>
                                                 <a href="#" class="btn btn-success btn-sm" title="Service Baru"><i class="fas fa-tools"></i></a>
                                             </td>
                                         </tr>

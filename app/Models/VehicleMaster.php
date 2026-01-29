@@ -35,7 +35,7 @@ class VehicleMaster extends Model
     public function customer()
     {
         // Pastikan nama Model Customer sudah benar (asumsi App\Models\Customer)
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Customer::class, 'customer_id');
     }
 
     /**
@@ -44,7 +44,7 @@ class VehicleMaster extends Model
     public function services()
     {
         // Pastikan nama Model Service sudah benar (asumsi App\Models\Service)
-        return $this->hasMany(Service::class);
+        return $this->hasMany(Service::class, 'vehicle_master_id');
     }
     
     /**

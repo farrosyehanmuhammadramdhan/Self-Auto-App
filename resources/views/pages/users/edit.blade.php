@@ -28,7 +28,7 @@
                         <div class="card-header">
                             <h4>Form Tambah Pengguna</h4>
                         </div>
-                        <form action="{{ route('users.store') }}" method="POST">
+                        <form action="{{ route('users.update', $user->id) }}" enctype="multipart/form-data" class="needs-validation" novalidate="" method="POST') }}" method="POST">
                             @csrf
                             <div class="card-body">
                                 <div class="row">

@@ -81,6 +81,15 @@ class VehicleMasterController extends Controller
         return redirect()->route('vehicle-masters.index')->with('success', 'Master Kendaraan berhasil disimpan.');
     }
 
+    public function show($id)
+    {
+        // Mengambil data kendaraan beserta relasi customer dan services (termasuk teknisi di dalam service)
+        $vehicle = VehicleMaster::with(['customer', 'services.technician'])->findOrFail($id);
+
+        return view('pages.vehicles_master.show', compact('vehicle'));
+    }
+
+
     /**
      * Tampilkan form untuk mengedit Vehicle Master.
      */

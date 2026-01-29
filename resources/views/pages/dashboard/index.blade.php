@@ -69,7 +69,7 @@
                             <h4>Total Service</h4>
                         </div>
                         <div class="card-body">
-                            35
+                            {{ $services }}
                         </div>
                         <div class="mt-2 mb-3 ml-4">
                             <a href="{{ route('services.index') }}" class="btn btn-primary btn-sm">Lihat Detail</a>
@@ -158,7 +158,8 @@
                                     <th>Total</th>
                                     <th></th>
                                 </tr>
-                                <tr>
+                                @foreach ($service as $data )
+                                    <tr>
                                     <td><a href="#">23-09-2018</a></td>
                                     <td class="font-weight-600">Kusnadi</td>
                                     <td>Mercedes Benz</td>
@@ -168,6 +169,8 @@
                                             class="btn btn-info"><i class="fas fa-eye"></i></a>
                                     </td>
                                 </tr>
+                                @endforeach
+                                
                             </table>
                         </div>
                     </div>

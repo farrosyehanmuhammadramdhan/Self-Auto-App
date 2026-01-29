@@ -12,10 +12,13 @@
 <div class="main-content">
     <section class="section">
         <div class="section-header">
-            <h1>Data Pelanggan</h1>
+            <h1>Histori Stok</h1>
             <div class="section-header-button">
-                <a href="#" class="btn btn-primary">
-                    <i class="fas fa-user-plus"></i> Tambah Stok
+                <a href="{{ route('stock.createIn') }}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Stok Masuk
+                </a>
+                <a href="{{ route('stock.createOut') }}" class="btn btn-danger">
+                    <i class="fas fa-minus"></i> Stok Keluar
                 </a>
             </div>
             <div class="section-header-breadcrumb">
@@ -27,10 +30,7 @@
 
         @include('layouts.alert')
         <div class="section-body">
-            <h2 class="section-title">Data Pelanggan</h2>
-            <p class="section-lead">
-                Kelola data semua pelanggan Anda di halaman ini.
-            </p>
+            <h2 class="section-title">Histori Stok Spareparts</h2>
 
             <div class="row mt-4">
                 <div class="col-12">

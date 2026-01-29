@@ -16,7 +16,7 @@
 
         <div class="card-body">
             <form method="POST"
-                action="{{ route('login') }}"
+                action="#"
                 class="needs-validation"
                 novalidate="">
                 @csrf

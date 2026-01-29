@@ -27,7 +27,7 @@ class Customer extends Model
     ];
 
     
-    public function vehicles() : HasMany
+    public function vehicles()
     {
         return $this->hasMany(VehicleMaster::class, 'customer_id');
     }

@@ -11,7 +11,7 @@ use App\Http\Controllers\SalesController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ServiceMasterController;
-use App\Http\Controllers\StockController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +25,7 @@ use App\Http\Controllers\StockController;
 */
 
 Route::resource('customers', CustomerController::class);
+Route::resource('users', UserController::class);
 Route::resource('vehicle-masters', VehicleMasterController::class);
 Route::resource('categories', CategoriesController::class);
 Route::resource('spareparts', SparepartsController::class);
@@ -33,12 +34,7 @@ Route::resource('sales', SalesController::class);
 Route::resource('dashboard', DashboardController::class);
 Route::resource('services-masters', ServiceMasterController::class);
 Route::resource('services', ServiceController::class);
-Route::resource('stock', StockController::class);
 
-
-Route::get('/login', function () {
-    return view('auth.login');
-});
 
 Route::get('/', function () {
     return view('welcome');

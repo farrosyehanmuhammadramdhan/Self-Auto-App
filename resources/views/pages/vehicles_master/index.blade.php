@@ -75,7 +75,7 @@
                                             <td>
                                                 {{ $vehicle_master->customer->name ?? 'N/A' }}
                                                 <div class="table-links">
-                                                    <a href="#">View</a>
+                                                    <a href="{{ route('vehicle-masters.show', $vehicle_master->id) }}">View</a>
                                                     <div class="bullet"></div>
                                                     <a href="{{ route('vehicle-masters.edit', $vehicle_master->id) }}">Edit</a>
                                                     <div class="bullet"></div>

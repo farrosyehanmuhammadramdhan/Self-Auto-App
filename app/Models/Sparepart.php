@@ -29,4 +29,6 @@ class Sparepart extends Model
         // Mendefinisikan relasi: satu sparepart dimiliki oleh satu category
         return $this->belongsTo(Category::class);
     }
+
+    
 }

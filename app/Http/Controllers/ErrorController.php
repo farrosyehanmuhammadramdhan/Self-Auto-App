@@ -8,20 +8,20 @@ class ErrorController extends Controller
     public function not_found()
     {
         header('HTTP/1.1 404 Not Found');
-        return view('pages.errors.404');
+        return view('pages.error.404');
     }
 
     // 403 Forbidden
     public function forbidden()
     {
         header('HTTP/1.1 403 Forbidden');
-        return view('pages.errors.403');
+        return view('pages.error.403');
     }
 
     // 500 Internal Server Error
     public function server_error()
     {
         header('HTTP/1.1 500 Internal Server Error');
-        return view('pages.errors.500');
+        return view('pages.error.500');
     }
 }
